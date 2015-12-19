@@ -76,3 +76,9 @@ C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\System.Web
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\System.Web.WebPages.Deployment.xml
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\System.Web.WebPages.Razor.xml
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\System.Web.Http.OData.xml
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\Newtonsoft.Json.xml
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\Microsoft.Web.WebPages.OAuth.xml
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\WebMatrix.WebData.xml
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\Microsoft.Data.Edm.xml
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\Microsoft.Data.OData.xml
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network\bin\System.Spatial.xml

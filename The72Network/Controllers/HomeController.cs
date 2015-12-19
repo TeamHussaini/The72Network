@@ -10,8 +10,7 @@ namespace The72Network.Controllers
 	{
 		public ActionResult Index()
 		{
-			ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
+			ViewBag.Message = "This is the demo of the networking site connecting Hussainis.";
 			return View();
 		}
 

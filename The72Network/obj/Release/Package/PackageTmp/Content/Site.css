@@ -90,6 +90,12 @@ h5, h6 {
         text-decoration: none;
     }
 
+.logo {
+    background: url("../Images/Logo.jpg") no-repeat center;
+    display: block; 
+    height: 100px; 
+    width: 850px;
+    }
 
 /* main layout
 ----------------------------------------------------------*/
