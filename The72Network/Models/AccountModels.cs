@@ -19,13 +19,44 @@ namespace The72Network.Models
 	}
 
 	[Table("UserProfile")]
-	public class UserProfile
+	public class UserProfile : Entity
+	{
+		public string UserName { get; set; }
+		public string EmailId { get; set; }
+		public string MobilePhone { get; set; }
+		public string Country { get; set; }
+	}
+
+	[Table("UserExtendedProfile")]
+	public class UserExtendedProfile : Entity
+	{
+		[ForeignKey("UserProfile")]
+		public int UserId { get; set; }
+
+		public virtual UserProfile UserProfile { get; set; }
+
+		public string Profession { get; set; }
+		
+		public string Qualification { get; set; }
+
+		public string AlmaMater{ get; set; }
+
+		public string DOB { get; set; }
+
+		public string City { get; set; }
+
+		public string Tags { get; set; }
+
+		public string ImageUrl { get; set; }
+	}
+
+	public class Entity
 	{
 		[Key]
 		[DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-		public int UserId { get; set; }
-		public string UserName { get; set; }
+		public int Id { get; set; }
 	}
+
 
 	public class RegisterExternalLoginModel
 	{
@@ -77,6 +108,19 @@ namespace The72Network.Models
 		public string UserName { get; set; }
 
 		[Required]
+		[Display(Name = "Email Id")]
+		public string EmailId { get; set; }
+
+
+		[Required]
+		[Display(Name = "Mobile Phone")]
+		public string MobilePhone { get; set; }
+
+		[Required]
+		[Display(Name = "Country")]
+		public string Country { get; set; }
+
+		[Required]
 		[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
 		[DataType(DataType.Password)]
 		[Display(Name = "Password")]
@@ -86,6 +130,37 @@ namespace The72Network.Models
 		[Display(Name = "Confirm password")]
 		[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
 		public string ConfirmPassword { get; set; }
+	}
+
+	public class UserExtendedProfileModel
+	{
+		[Required]
+		[Display(Name = "Profession")]
+		public string Profession { get; set; }
+		
+		[Required]
+		[Display(Name = "Qualification")]
+		public string Qualification { get; set; }
+
+		[Required]
+		[Display(Name = "Alma Mater")]
+		public string AlmaMater{ get; set; }
+
+		[Required]
+		[Display(Name = "Date of Birth")]
+		public string DOB { get; set; }
+
+		[Required]
+		[Display(Name = "City")]
+		public string City { get; set; }
+
+		[Required]
+		[Display(Name = "Tags")]
+		public string Tags { get; set; }
+
+
+		[Display(Name = "Image")]
+		public string ImageUrl { get; set; }
 	}
 
 	public class ExternalLogin

@@ -1,20 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Transactions;
+using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using The72Network.EntityFramework;
 using WebMatrix.WebData;
 using The72Network.Filters;
 using The72Network.Models;
+using The72Network.Shared;
+using IsolationLevel = System.Transactions.IsolationLevel;
 
 namespace The72Network.Controllers
 {
 	[Authorize]
-	[InitializeSimpleMembership]
 	public class AccountController : Controller
 	{
 		//
@@ -79,9 +88,24 @@ namespace The72Network.Controllers
 				// Attempt to register the user
 				try
 				{
-					WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+					using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
+					{
+						UserProfile user = new UserProfile
+						{
+							UserName = model.UserName,
+							Country = model.Country,
+							EmailId = model.EmailId,
+							MobilePhone = model.MobilePhone
+						};
+
+						dbContext.UserProfiles.Add(user);
+						dbContext.SaveChanges();
+					}
+
+					WebSecurity.CreateAccount(model.UserName, model.Password);
 					WebSecurity.Login(model.UserName, model.Password);
-					return RedirectToAction("Index", "Home");
+
+					return RedirectToAction("UserExtendedProfile", "Account");
 				}
 				catch (MembershipCreateUserException e)
 				{
@@ -92,6 +116,162 @@ namespace The72Network.Controllers
 			// If we got this far, something failed, redisplay form
 			return View(model);
 		}
+
+		//
+		// GET: /Account/UserExtendedProfile
+
+		public ActionResult UserExtendedProfile()
+		{
+			using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
+			{
+				IQueryable<int> userId = dbContext.UserProfiles.Where(p => p.UserName == User.Identity.Name).Select(u => u.Id);
+				var userProfile = dbContext.UserExtendedProfile.FirstOrDefault(p => p.UserId == userId.FirstOrDefault());
+				if (userProfile == null)
+				{
+					return View();
+				}
+				UserExtendedProfileModel model = new UserExtendedProfileModel
+				{
+					AlmaMater = userProfile.AlmaMater,
+					City = userProfile.City,
+					DOB = userProfile.DOB,
+					Profession = userProfile.Profession,
+					Tags = userProfile.Tags,
+					Qualification = userProfile.Qualification,
+					ImageUrl = userProfile.ImageUrl
+				};
+
+				return View(model);
+			}
+		}
+
+		//
+		// POST: /Account/UserExtendedProfile
+
+		[HttpPost]
+		[AllowAnonymous]
+		[ValidateAntiForgeryToken]
+		public ActionResult UserExtendedProfile(UserExtendedProfileModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				// Extend the user's profile
+				try
+				{
+					using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
+					{
+						IQueryable<int> userId = dbContext.UserProfiles.Where(p => p.UserName == User.Identity.Name).Select(u => u.Id);
+						IQueryable<int> profileId = dbContext.UserExtendedProfile.Where(u => u.UserId == userId.FirstOrDefault()).Select(p => p.Id);
+						UserExtendedProfile profile = new UserExtendedProfile
+						{
+							UserId = userId.First(),
+							AlmaMater = model.AlmaMater,
+							City = model.City,
+							DOB = model.DOB,
+							Profession = model.Profession,
+							Tags = model.Tags,
+							Qualification = model.Qualification,
+							ImageUrl = string.Empty
+						};
+
+						if (profileId.Any())
+						{
+							profile.Id = profileId.First();
+							profile.Update(dbContext);
+						}
+						else
+						{
+							dbContext.UserExtendedProfile.Add(profile);
+						}
+
+						dbContext.SaveChanges();
+					}
+					
+					return RedirectToAction("Index", "Home");
+				}
+				catch (Exception e)
+				{
+					// TODO : Exception printing stacktrace needs to be removed.
+					ModelState.AddModelError("", e.StackTrace);
+				}
+			}
+
+			// If we got this far, something failed, redisplay form
+			return View(model);
+		}
+
+
+		//
+		// POST: /Account/UploadImage
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult UploadImage(HttpPostedFileBase file)
+		{
+			if (file != null)
+			{
+				using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
+				{
+					try
+					{
+						string imageName = Path.GetFileName(file.FileName);
+						if (imageName == null)
+						{
+							return RedirectToAction("UserExtendedProfile", "Account");
+						}
+
+						string imageExtension = imageName.Substring(imageName.IndexOf('.'));
+						imageName = imageName.Substring(0, imageName.IndexOf('.')) + "_" + User.Identity.Name + imageExtension;
+
+						string physicalPath = Server.MapPath("~/Images/ProfilePic");
+						physicalPath = Path.Combine(physicalPath, imageName);
+
+						// Saves the image to file system.
+						file.SaveAs(physicalPath);
+
+						IQueryable<int> userId = dbContext.UserProfiles.Where(p => p.UserName == User.Identity.Name).Select(u => u.Id);
+						var userProfile = dbContext.UserExtendedProfile.FirstOrDefault(p => p.UserId == userId.FirstOrDefault());
+
+						if (userProfile == null)
+						{
+							UserExtendedProfile profile = new UserExtendedProfile
+							{
+								UserId = userId.First(),
+								ImageUrl = imageName
+							};
+
+							dbContext.UserExtendedProfile.Add(profile);
+						}
+						else
+						{
+							UserExtendedProfile profile= new UserExtendedProfile
+							{
+								UserId = userId.First(),
+								Id = userProfile.Id,
+								AlmaMater = userProfile.AlmaMater,
+								City = userProfile.City,
+								DOB = userProfile.DOB,
+								Profession = userProfile.Profession,
+								Tags = userProfile.Tags,
+								Qualification = userProfile.Qualification,
+								ImageUrl = imageName
+							};
+
+							profile.Update(dbContext);
+						}
+
+						dbContext.SaveChanges();
+					}
+					// TODO : Exception printing stacktrace needs to be removed.
+					catch (Exception e)
+					{
+						ModelState.AddModelError("", e.StackTrace);
+					}
+				}
+			}
+
+			return RedirectToAction("UserExtendedProfile", "Account");
+		}
+
 
 		//
 		// POST: /Account/Disassociate

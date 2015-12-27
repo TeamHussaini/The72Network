@@ -1,0 +1,63 @@
+﻿@using System.Globalization
+@model The72Network.Models.UserExtendedProfileModel
+@{
+	ViewBag.Title = string.Format("{0}'s Profile", User.Identity.Name, CultureInfo.InvariantCulture);
+}
+<hgroup class="title">
+	<h1>@ViewBag.Title.</h1>
+	<h3>Please complete the profile so that we can assign tags to you.</h3>
+</hgroup>
+
+@if (Model != null && !string.IsNullOrEmpty(Model.ImageUrl))
+{
+	<div class="ProfileImage">
+		<img src="~/Images/@Model.ImageUrl" width="200" height="250" />
+	</div>
+
+	@Html.Partial("_ImageUploaderPartial", "ChangeImage");
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary()
+
+	<fieldset>
+		<legend>User Profile</legend>
+		<ol>
+			<li>
+				@Html.LabelFor(m => m.Profession)
+				@Html.TextBoxFor(m => m.Profession)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Qualification)
+				@Html.TextBoxFor(m => m.Qualification)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.AlmaMater)
+				@Html.TextBoxFor(m => m.AlmaMater)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.City)
+				@Html.TextBoxFor(m => m.City)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.DOB)
+				@Html.TextBoxFor(m => m.DOB)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Tags)
+				@Html.TextBoxFor(m => m.Tags)
+			</li>
+		</ol>
+		<input type="submit" value="Submit" />
+	</fieldset>
+}
+@if (Model == null || string.IsNullOrEmpty(Model.ImageUrl))
+{	
+	@Html.Partial("_ImageUploaderPartial", "Upload");
+}
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
