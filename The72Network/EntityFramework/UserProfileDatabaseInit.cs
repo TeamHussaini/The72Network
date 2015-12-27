@@ -4,6 +4,7 @@ using WebMatrix.WebData;
 
 namespace The72Network.EntityFramework
 {
+	//public class UserProfileDatabaseInit : DbMigrationsConfiguration<UserProfileDatabaseContext>
 	public class UserProfileDatabaseInit : DropCreateDatabaseAlways<UserProfileDatabaseContext>
 	{
 		//public UserProfileDatabaseInit()
