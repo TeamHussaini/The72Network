@@ -11,7 +11,7 @@
 @if (Model != null && !string.IsNullOrEmpty(Model.ImageUrl))
 {
 	<div class="ProfileImage">
-		<img src="~/Images/@Model.ImageUrl" width="200" height="250" />
+		<img src="~/Images/ProfilePic/@Model.ImageUrl" width="200" height="250" />
 	</div>
 
 	@Html.Partial("_ImageUploaderPartial", "ChangeImage");

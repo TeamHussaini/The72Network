@@ -6,7 +6,6 @@
 
 body {
     background-color: #fff;
-    border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -30,8 +29,14 @@ a {
     a:hover {
         background-color: #c7d1d6;
     }
+header {height:50px;
+        background:black;
+        width:100%;
+        z-index:10;
+        position:fixed;
+}
 
-header, footer, hgroup,
+ footer, hgroup,
 nav, section {
     display: block;
 }
@@ -91,10 +96,13 @@ h5, h6 {
     }
 
 .logo {
-    background: url("../Images/Logo.jpg") no-repeat center;
+    background: url('../Images/logonew.jpg');
+    background-repeat:no-repeat;
     display: block; 
-    height: 100px; 
-    width: 850px;
+    height: 50px; 
+    width: 200px;
+    float:left;
+    margin:0;
     }
 
 div.profileImage {
@@ -117,16 +125,16 @@ div.profileImage {
     .main-content {
         background: url("../Images/accent.png") no-repeat;
         padding-left: 10px;
-        padding-top: 30px;
+        padding-top:30px;
     }
 
     .featured + .main-content {
         background: url("../Images/heroAccent.png") no-repeat;
     }
 
-header .content-wrapper {
+/*header .content-wrapper {
     padding-top: 20px; 
-}
+}*/
 
 footer {
     clear: both;
@@ -240,6 +248,11 @@ ul#menu {
         .featured p {
             font-size: 1.1em;
         }
+        /*index page*/
+.index-cover {background-color:white;
+              height:520px;
+              width:1500px;
+}
 
 /* page titles */
 hgroup.title {
@@ -624,7 +637,7 @@ tr.pager td {
 
     /* logo */
     header .site-title {
-        margin: 10px;
+        margin: 0;
         text-align: center;
     }
 
@@ -769,8 +782,9 @@ tr.pager td {
 
     footer {
         text-align: center;
-        height: auto;
+        
         padding: 10px 0;
+        clear:both;
     }
 
         footer p {
