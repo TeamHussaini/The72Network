@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using _72NetworkBootstraped.EntityFramework;
 
 namespace _72NetworkBootstraped
 {
@@ -23,6 +25,10 @@ namespace _72NetworkBootstraped
       RouteConfig.RegisterRoutes(RouteTable.Routes);
       BundleConfig.RegisterBundles(BundleTable.Bundles);
       AuthConfig.RegisterAuth();
+
+      Database.SetInitializer(new MigrateDatabaseToLatestVersion<UserProfileDatabaseContext, UserProfileDatabaseInit>());
+      //Database.SetInitializer<UserProfileDatabaseContext>(new UserProfileDatabaseInit());
+      new UserProfileDatabaseContext().UserProfiles.Find(1);
     }
   }
 }

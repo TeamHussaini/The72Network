@@ -2,6 +2,10 @@
   ViewBag.Title = "Home";
 }
 
+@if (!Request.IsAuthenticated) { 
+  Response.Redirect("~/Account/SignIn");
+}
+
 <!-- ******CONTENT****** -->
 <div class="content container">
   <div id="promo-slider" class="slider flexslider">
@@ -274,7 +278,6 @@
       <a class="right carousel-control" href="#awards-carousel" data-slide="next">
         <i class="fa fa-angle-right"></i>
       </a>
-
     </div>
   </section>
 </div><!--//content-->

@@ -12,7 +12,6 @@ C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\En
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Microsoft.Data.Edm.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Microsoft.Data.OData.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Microsoft.Web.WebPages.OAuth.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Newtonsoft.Json.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\System.Spatial.dll
@@ -174,3 +173,6 @@ C:\Users\Mir Zaki\Documents\The72Network\the72network\72NetworkBootstraped\bin\W
 C:\Users\Mir Zaki\Documents\The72Network\the72network\72NetworkBootstraped\bin\Microsoft.Web.Helpers.dll
 C:\Users\Mir Zaki\Documents\The72Network\the72network\72NetworkBootstraped\bin\EntityFramework.SqlServer.dll
 C:\Users\Mir Zaki\Documents\The72Network\the72network\72NetworkBootstraped\bin\EntityFramework.SqlServer.xml
+C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\EntityFramework.SqlServer.dll
+C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Microsoft.Web.Helpers.dll
+C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\EntityFramework.SqlServer.xml

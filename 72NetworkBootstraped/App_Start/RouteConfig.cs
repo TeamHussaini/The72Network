@@ -14,6 +14,11 @@ namespace _72NetworkBootstraped
       routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
       routes.MapRoute(
+          "Account",
+          "Account/ManageAccount",
+          new { controller = "Account", action = "SignUp" }
+      );
+      routes.MapRoute(
           name: "Default",
           url: "{controller}/{action}/{id}",
           defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

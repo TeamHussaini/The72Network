@@ -1,0 +1,92 @@
+﻿@using System.Globalization
+@model _72NetworkBootstraped.Models.UserExtendedProfileModel
+@{
+  ViewBag.Title = string.Format("{0}'s Profile", User.Identity.Name, CultureInfo.InvariantCulture);
+}
+
+<div class="container">
+  <div id="photobox" style="margin-top:50px; margin-bottom:50px" class="mainbox col-md-3 col-sm-4">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title">Photo</div>
+        <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+      </div>
+      <div style="padding-top:30px" class="panel-body">
+        @if (Model != null && !string.IsNullOrEmpty(Model.ImageUrl))
+        {
+          <div class="thumb">
+            <img class="ìmg-responsive" src="~/Images/ProfilePic/@Model.ImageUrl" width="220" height="220" />
+          </div>
+          @Html.Partial("_ImageUploaderPartial", "Update")
+        }
+        else
+        {
+          <div class="thumb">
+            <img class="ìmg-responsive" src="~/Images/person-placeholder.jpg" width="220" height="220" />
+            @Html.Partial("_ImageUploaderPartial", "Upload")
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  @using (Html.BeginForm())
+  {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div id="signupbox" style="margin-top:50px; margin-bottom:50px" class="mainbox col-md-6 col-md-offset-1 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="panel-title">@ViewBag.Title</div>
+          <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+        </div>
+        <div style="padding-top:30px" class="panel-body">
+          <div style="color:red">
+            @Html.ValidationSummary()
+          </div>
+          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+          <form id="loginform" class="form-horizontal" role="form">
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon">@Html.LabelFor(m => m.Profession)</span>
+              @Html.TextBoxFor(m => m.Profession, new { @class = "form-control", @placeholder = "Profession" })
+            </div>
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon">@Html.LabelFor(m => m.Qualifications)</span>
+              @Html.TextBoxFor(m => m.Qualifications, new { @class = "form-control", @placeholder = "Qualifications" })
+            </div>
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon">@Html.LabelFor(m => m.AlmaMater)</span>
+              @Html.TextBoxFor(m => m.AlmaMater, new { @class = "form-control", @placeholder = "Profession" })
+            </div>
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon">@Html.LabelFor(m => m.City)</span>
+              @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+            </div>
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon">@Html.LabelFor(m => m.DOB)</span>
+              @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", @placeholder = "DOB" })
+            </div>
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon">@Html.LabelFor(m => m.Tags)</span>
+              @Html.TextBoxFor(m => m.Tags, new { @class = "form-control", @placeholder = "Tags" })
+            </div>
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon">@Html.LabelFor(m => m.Profession)</span>
+              @Html.TextBoxFor(m => m.Profession, new { @class = "form-control", @placeholder = "Profession" })
+            </div>
+            <div style="margin-bottom:10px" class="form-group">
+              <!-- Button -->
+              <div style="margin-top: 25px" class="controls">
+                <input type="submit" class="btn btn-success" value="Update" id="btn-login" name="submit" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+}
