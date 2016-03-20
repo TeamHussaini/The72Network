@@ -9,12 +9,12 @@ namespace _72NetworkBootstraped.EntityFramework
     public UserProfileDatabaseContext()
       : base("DefaultConnection")
     {
-      
     }
 
     public DbSet<UserProfile> UserProfiles { get; set; }
-
     public DbSet<UserExtendedProfile> UserExtendedProfile { get; set; }
+
+    public DbSet<Tag> Tag { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {

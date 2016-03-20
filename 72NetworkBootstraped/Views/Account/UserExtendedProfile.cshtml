@@ -5,13 +5,13 @@
 }
 
 <div class="container">
-  <div id="photobox" style="margin-top:50px; margin-bottom:50px" class="mainbox col-md-3 col-sm-4">
+  <div id="photobox" style="margin-top: 50px; margin-bottom: 50px" class="mainbox col-md-3 col-sm-4">
     <div class="panel panel-info">
       <div class="panel-heading">
         <div class="panel-title">Photo</div>
-        <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+        <div style="float: right; font-size: 80%; position: relative; top: -10px"></div>
       </div>
-      <div style="padding-top:30px" class="panel-body">
+      <div style="padding-top: 30px" class="panel-body">
         @if (Model != null && !string.IsNullOrEmpty(Model.ImageUrl))
         {
           <div class="thumb">
@@ -34,47 +34,56 @@
   {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    <div id="signupbox" style="margin-top:50px; margin-bottom:50px" class="mainbox col-md-6 col-md-offset-1 col-sm-8 col-sm-offset-2">
+    <div id="signupbox" style="margin-top: 50px; margin-bottom: 50px" class="mainbox col-md-6 col-md-offset-1 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="panel-title">@ViewBag.Title</div>
-          <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+          <div style="float: right; font-size: 80%; position: relative; top: -10px"></div>
         </div>
-        <div style="padding-top:30px" class="panel-body">
-          <div style="color:red">
+        <div style="padding-top: 30px" class="panel-body">
+          <div style="color: red">
             @Html.ValidationSummary()
           </div>
-          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+          <div style="display: none" id="login-alert" class="alert alert-danger col-sm-12"></div>
           <form id="loginform" class="form-horizontal" role="form">
-            <div style="margin-bottom: 25px" class="input-group">
+            <div class="input-group">
               <span class="input-group-addon">@Html.LabelFor(m => m.Profession)</span>
-              @Html.TextBoxFor(m => m.Profession, new { @class = "form-control", @placeholder = "Profession" })
+              @Html.DropDownListFor(m => m.Profession, ViewBag.ProfessionList as SelectList, Model != null ? Model.Profession : "", new { @class = "form-control", @placeholder = "Select Profession" })
             </div>
-            <div style="margin-bottom: 25px" class="input-group">
+            @Html.ValidationMessageFor(m => m.Profession, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 25px" class="input-group">
               <span class="input-group-addon">@Html.LabelFor(m => m.Qualifications)</span>
               @Html.TextBoxFor(m => m.Qualifications, new { @class = "form-control", @placeholder = "Qualifications" })
             </div>
-            <div style="margin-bottom: 25px" class="input-group">
+            @Html.ValidationMessageFor(m => m.Qualifications, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 25px" class="input-group">
               <span class="input-group-addon">@Html.LabelFor(m => m.AlmaMater)</span>
-              @Html.TextBoxFor(m => m.AlmaMater, new { @class = "form-control", @placeholder = "Profession" })
+              @Html.TextBoxFor(m => m.AlmaMater, new { @class = "form-control", @placeholder = "AlmaMater" })
             </div>
-            <div style="margin-bottom: 25px" class="input-group">
+            @Html.ValidationMessageFor(m => m.AlmaMater, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 25px" class="input-group">
               <span class="input-group-addon">@Html.LabelFor(m => m.City)</span>
               @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
             </div>
-            <div style="margin-bottom: 25px" class="input-group">
+            @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 25px" class="input-group">
               <span class="input-group-addon">@Html.LabelFor(m => m.DOB)</span>
-              @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", @placeholder = "DOB" })
+              @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", @placeholder = "dd-mm-yyyy" })
             </div>
-            <div style="margin-bottom: 25px" class="input-group">
+            @Html.ValidationMessageFor(m => m.DOB, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 25px" class="input-group">
               <span class="input-group-addon">@Html.LabelFor(m => m.Tags)</span>
-              @Html.TextBoxFor(m => m.Tags, new { @class = "form-control", @placeholder = "Tags" })
+              @Html.ListBox("Tags", new MultiSelectList(ViewBag.TagList, "Id", "TagName", Model != null ? Model.Tags.AsEnumerable() : null),
+                new { @class = "form-control input-group select", @placeholder = "Select Tags" })
             </div>
-            <div style="margin-bottom: 25px" class="input-group">
-              <span class="input-group-addon">@Html.LabelFor(m => m.Profession)</span>
-              @Html.TextBoxFor(m => m.Profession, new { @class = "form-control", @placeholder = "Profession" })
-            </div>
-            <div style="margin-bottom:10px" class="form-group">
+            @Html.ValidationMessageFor(m => m.Tags, "", new { @class = "text-danger" })
+
+            <div style="margin-bottom: 10px" class="form-group">
               <!-- Button -->
               <div style="margin-top: 25px" class="controls">
                 <input type="submit" class="btn btn-success" value="Update" id="btn-login" name="submit" />
@@ -86,7 +95,14 @@
     </div>
   }
 </div>
-
 @section Scripts {
   @Scripts.Render("~/bundles/jqueryval")
+  @Scripts.Render("~/Scripts/chosen.jquery.min.js")
+  <script>
+    $(".select").chosen();
+  </script>
+}
+@section Styles {
+  @Styles.Render("~/Content/chosen.min.css")
+  @Styles.Render("~/Content/site.min.css")
 }

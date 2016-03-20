@@ -2,7 +2,8 @@
   ViewBag.Title = "Home";
 }
 
-@if (!Request.IsAuthenticated) { 
+@if (!Request.IsAuthenticated)
+{
   Response.Redirect("~/Account/SignIn");
 }
 
@@ -121,45 +122,25 @@
               <p class="location"><i class="fa fa-map-marker"></i>IIT Bombay</p>
             </div><!--//details-->
             <a class="read-more" href="events.html">All events<i class="fa fa-chevron-right"></i></a>
-          </div><!--//section-content-->
+          </div>
+        </div><!--//section-content-->
       </section><!--//events-->
     </div><!--//col-md-3-->
     <div class="col-md-6">
       <section class="course-finder">
         <h1 class="section-heading text-highlight"><span class="line">People Finder</span></h1>
-        <div class="section-content">
-          <form class="course-finder-form" action="#" method="get">
-            <div class="row">
-              <div class="col-md-5 col-sm-5 subject">
-                <select class="form-control subject">
-                  <option>Choose a field</option>
-                  <option>Accounting & Finance</option>
-                  <option>Biological Sciences</option>
-                  <option>Business Studies</option>
-                  <option>Computer Science</option>
-                  <option>Creative Arts & Media</option>
-                  <option>Drama</option>
-                  <option>Education</option>
-                  <option>Engineering</option>
-                  <option>Film Studies</option>
-                  <option>Fitness Training</option>
-                  <option>Hospitality</option>
-                  <option>History</option>
-                  <option>International Relations</option>
-                  <option>Law</option>
-                  <option>Mathematics</option>
-                  <option>Music</option>
-                  <option>Physics</option>
-                  <option>Religion</option>
-                  <option>Social Science</option>
-                </select>
-              </div>
-              <div class="col-md-7 col-sm-7 keywords">
-                <input class="form-control pull-left" type="text" placeholder="Search tags" />
-                <button type="submit" class="btn btn-theme"><i class="fa fa-search"></i></button>
+        <div class="section-content-tagSearch section-content">
+          <form id="loginform" class="form-horizontal" role="form">
+            <div style="margin-top: 25px" class="input-group">
+              @Html.ListBox("Tags", new MultiSelectList(ViewBag.TagList, "Id", "TagName"),
+                  new { @class = "form-control input-group select tag-search-select" })
+              <div style="margin-left: 60px; float: right; margin-top:7px">
+                <button type="button" class="btn btn-theme tag-search-btn"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </form><!--//course-finder-form-->
+          <br>
+          <br>
           <a class="read-more" href="AdvancedSearch.html">Advanced Search<i class="fa fa-chevron-right"></i></a>
         </div><!--//section-content-->
       </section><!--//course-finder-->
@@ -196,7 +177,7 @@
                 <blockquote class="quote">
                   <p>
                     <i class="fa fa-quote-left"></i>
-                      Same goes here. The quotes will be dynamic, maybe 4 per day and will keep changing.
+                    Same goes here. The quotes will be dynamic, maybe 4 per day and will keep changing.
                   </p>
                 </blockquote>
                 <div class="row">
@@ -208,7 +189,7 @@
                 <blockquote class="quote">
                   <p>
                     <i class="fa fa-quote-left"></i>
-                      Same goes here.
+                    Same goes here.
                   </p>
                 </blockquote>
                 <div class="row">
@@ -281,3 +262,29 @@
     </div>
   </section>
 </div><!--//content-->
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+  @Scripts.Render("~/Scripts/chosen.jquery.min.js")
+  <script>
+    $(".select").chosen();
+    $(function() {
+      $(".tag-search-btn").click(function() {
+        $.ajax({
+          url: '@(Url.Action("TagSearch", "Home"))',
+          type: 'post',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify($('.select').chosen().val()),
+          success: function (json) {
+            alert(json);
+            console.log(json);
+          }
+        });
+      });
+    });
+  </script>
+}
+@section Styles {
+  @Styles.Render("~/Content/chosen.min.css")
+  @Styles.Render("~/Content/sitealternate.min.css")
+}

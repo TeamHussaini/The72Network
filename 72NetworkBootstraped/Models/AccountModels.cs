@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
+using System.Web.Mvc;
 using System.Web.Security;
 
 namespace _72NetworkBootstraped.Models
@@ -18,6 +19,8 @@ namespace _72NetworkBootstraped.Models
     public DbSet<UserProfile> UserProfiles { get; set; }
   }
 
+  #region Entities
+
   [Table("UserProfile")]
   public class UserProfile : Entity
   {
@@ -28,15 +31,16 @@ namespace _72NetworkBootstraped.Models
     public string MobilePhone { get; set; }
 
     public string Country { get; set; }
+
+    public virtual UserExtendedProfile UserExtendedProfile { get; set; }
   }
 
   [Table("UserExtendedProfile")]
   public class UserExtendedProfile : Entity
   {
-    [ForeignKey("UserProfile")]
-    public int UserId { get; set; }
-
-    public virtual UserProfile UserProfile { get; set; }
+    [Key, ForeignKey("UserProfile")]
+    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
+    public override int Id { get; set; } 
 
     public string Profession { get; set; }
 
@@ -48,17 +52,33 @@ namespace _72NetworkBootstraped.Models
 
     public string City { get; set; }
 
-    public string Tags { get; set; }
-
     public string ImageUrl { get; set; }
+
+    public virtual UserProfile UserProfile { get; set; }
+
+    [Timestamp]
+    public virtual ICollection<Tag> Tags { get; set; }
+  }
+
+  [Table("Tag")]
+  public class Tag : Entity
+  {
+    public string TagName { get; set; }
+
+    [Timestamp]
+    public virtual ICollection<UserExtendedProfile> Users { get; set; }
   }
 
   public class Entity
   {
     [Key]
     [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
+    public virtual int Id { get; set; }
   }
+
+  #endregion
+
+  #region Models
 
   public class RegisterExternalLoginModel
   {
@@ -84,7 +104,7 @@ namespace _72NetworkBootstraped.Models
 
     [DataType(DataType.Password)]
     [Display(Name = "Confirm new password")]
-    [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+    [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
     public string ConfirmPassword { get; set; }
   }
 
@@ -108,14 +128,18 @@ namespace _72NetworkBootstraped.Models
   {
     [Required]
     [Display(Name = "User name")]
+    [Remote("IsUserUnique", "Account", ErrorMessage="UserName already in use.")]
     public string UserName { get; set; }
 
     [Required]
     [Display(Name = "Email Id")]
+    [EmailAddress(ErrorMessage = "Email-Id is not valid.")]
+    [Remote("IsEmailUnique", "Account", ErrorMessage="This emailId has already been registered with another username.")]
     public string EmailId { get; set; }
 
     [Required]
     [Display(Name = "Mobile Phone")]
+    [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
     public string MobilePhone { get; set; }
 
     [Required]
@@ -130,7 +154,7 @@ namespace _72NetworkBootstraped.Models
 
     [DataType(DataType.Password)]
     [Display(Name = "Confirm password")]
-    [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+    [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
     public string ConfirmPassword { get; set; }
   }
 
@@ -150,6 +174,8 @@ namespace _72NetworkBootstraped.Models
 
     [Required]
     [Display(Name = "Date of Birth")]
+    [RegularExpression(@"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$",
+      ErrorMessage = "Entered DOB is not valid.")]
     public string DOB { get; set; }
 
     [Required]
@@ -158,8 +184,7 @@ namespace _72NetworkBootstraped.Models
 
     [Required]
     [Display(Name = "Tags")]
-    public string Tags { get; set; }
-
+    public List<int> Tags { get; set; }
 
     [Display(Name = "Image")]
     public string ImageUrl { get; set; }
@@ -171,4 +196,6 @@ namespace _72NetworkBootstraped.Models
     public string ProviderDisplayName { get; set; }
     public string ProviderUserId { get; set; }
   }
+
+  #endregion
 }

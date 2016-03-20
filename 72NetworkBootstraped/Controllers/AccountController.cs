@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Transactions;
 using System.Web;
@@ -13,6 +14,8 @@ using _72NetworkBootstraped.Filters;
 using _72NetworkBootstraped.Models;
 using _72NetworkBootstraped.Shared;
 using System.IO;
+using System.Web.Helpers;
+using System.Web.Services.Configuration;
 
 namespace _72NetworkBootstraped.Controllers
 {
@@ -65,6 +68,7 @@ namespace _72NetworkBootstraped.Controllers
     [AllowAnonymous]
     public ActionResult SignUp()
     {
+      ViewBag.Countries = new SelectList(Util.ListOfCountries());
       return View();
     }
 
@@ -111,6 +115,24 @@ namespace _72NetworkBootstraped.Controllers
       return View(model);
     }
 
+    [AllowAnonymous]
+    public JsonResult IsUserUnique(string UserName)
+    {
+      using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
+      {
+        return Json(!dbContext.UserProfiles.Any(x => x.UserName == UserName), JsonRequestBehavior.AllowGet);
+      }
+    }
+
+    [AllowAnonymous]
+    public JsonResult IsEmailUnique(string emailId)
+    {
+      using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
+      {
+        return Json(!dbContext.UserProfiles.Any(x => x.EmailId == emailId), JsonRequestBehavior.AllowGet);
+      }
+    }
+
     //
     // GET: /Account/UserExtendedProfile
 
@@ -118,22 +140,29 @@ namespace _72NetworkBootstraped.Controllers
     {
       using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
       {
-        IQueryable<int> userId = dbContext.UserProfiles.Where(p => p.UserName == User.Identity.Name).Select(u => u.Id);
-        var userProfile = dbContext.UserExtendedProfile.FirstOrDefault(p => p.UserId == userId.FirstOrDefault());
-        if (userProfile == null)
+        UserProfile user = dbContext.UserProfiles.FirstOrDefault(p => p.UserName == User.Identity.Name);
+        ViewBag.TagList = Util.TagList;
+        ViewBag.ProfessionList = new SelectList(Util.ListOfProfessions);
+        if (user == null || user.UserExtendedProfile == null)
         {
           return View();
         }
+
         UserExtendedProfileModel model = new UserExtendedProfileModel
         {
-          AlmaMater = userProfile.AlmaMater,
-          City = userProfile.City,
-          DOB = userProfile.DOB,
-          Profession = userProfile.Profession,
-          Tags = userProfile.Tags,
-          Qualifications = userProfile.Qualifications,
-          ImageUrl = userProfile.ImageUrl
+          AlmaMater = user.UserExtendedProfile.AlmaMater,
+          City = user.UserExtendedProfile.City,
+          DOB = user.UserExtendedProfile.DOB,
+          Profession = user.UserExtendedProfile.Profession,
+          Qualifications = user.UserExtendedProfile.Qualifications,
+          ImageUrl = user.UserExtendedProfile.ImageUrl
         };
+
+        model.Tags = new List<int>();
+        foreach (Tag tag in user.UserExtendedProfile.Tags)
+        {
+          model.Tags.Add(tag.Id);
+        }
 
         return View(model);
       }
@@ -154,29 +183,60 @@ namespace _72NetworkBootstraped.Controllers
         {
           using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
           {
-            IQueryable<int> userId = dbContext.UserProfiles.Where(p => p.UserName == User.Identity.Name).Select(u => u.Id);
-            IQueryable<int> profileId = dbContext.UserExtendedProfile.Where(u => u.UserId == userId.FirstOrDefault()).Select(p => p.Id);
+            UserProfile user = dbContext.UserProfiles.FirstOrDefault(p => p.UserName == User.Identity.Name);
+            Dictionary<int, Tag> tagMap = dbContext.Tag.ToDictionary(x => x.Id, x => x);
+
+            if (user == null)
+            {
+              // Log
+              throw new Exception("User not found");
+            }
             UserExtendedProfile profile = new UserExtendedProfile
             {
-              UserId = userId.First(),
+              Id = user.Id,
+              UserProfile = user,
               AlmaMater = model.AlmaMater,
               City = model.City,
               DOB = model.DOB,
               Profession = model.Profession,
-              Tags = model.Tags,
               Qualifications = model.Qualifications,
-              ImageUrl = string.Empty
+              ImageUrl = string.Empty,
+              Tags = new List<Tag>()
             };
 
-            if (profileId.Any())
+            foreach (int tagId in model.Tags)
             {
-              profile.Id = profileId.First();
+              Tag selectedTag = tagMap[tagId];
+              profile.Tags.Add(selectedTag);
+              selectedTag.Users.Add(profile);
+            }
+
+            foreach (Tag tag in user.UserExtendedProfile.Tags)
+            {
+              
+            }
+
+            if (user.UserExtendedProfile != null)
+            {
+              profile.ImageUrl = user.UserExtendedProfile.ImageUrl;
               profile.Update(dbContext);
             }
             else
             {
               dbContext.UserExtendedProfile.Add(profile);
             }
+
+            UserProfile userProfile = new UserProfile
+            {
+              Id = user.Id,
+              EmailId = user.EmailId,
+              MobilePhone = user.MobilePhone,
+              Country = user.Country,
+              UserName = user.UserName,
+              UserExtendedProfile = profile
+            };
+
+            userProfile.Update(dbContext);
 
             dbContext.SaveChanges();
           }
@@ -222,35 +282,36 @@ namespace _72NetworkBootstraped.Controllers
             // Saves the image to file system.
             file.SaveAs(physicalPath);
 
-            IQueryable<int> userId = dbContext.UserProfiles.Where(p => p.UserName == User.Identity.Name).Select(u => u.Id);
-            var userProfile = dbContext.UserExtendedProfile.FirstOrDefault(p => p.UserId == userId.FirstOrDefault());
+            UserProfile user = dbContext.UserProfiles.FirstOrDefault(p => p.UserName == User.Identity.Name);
 
-            if (userProfile == null)
+            if (user == null)
             {
-              UserExtendedProfile profile = new UserExtendedProfile
-              {
-                UserId = userId.First(),
-                ImageUrl = imageName
-              };
+              throw new Exception("User not found.");
+            }
 
-              dbContext.UserExtendedProfile.Add(profile);
+            UserExtendedProfile profile = new UserExtendedProfile
+            {
+              Id = user.Id,
+              UserProfile = user,
+              ImageUrl = imageName
+            };
+
+            if (user.UserExtendedProfile != null)
+            {
+              profile.UserProfile = user;
+              profile.Id = user.UserExtendedProfile.Id;
+              profile.AlmaMater = user.UserExtendedProfile.AlmaMater;
+              profile.City = user.UserExtendedProfile.City;
+              profile.DOB = user.UserExtendedProfile.DOB;
+              profile.Profession = user.UserExtendedProfile.Profession;
+              profile.Qualifications = user.UserExtendedProfile.Qualifications;
+              profile.ImageUrl = imageName;
+
+              profile.Update(dbContext);
             }
             else
             {
-              UserExtendedProfile profile = new UserExtendedProfile
-              {
-                UserId = userId.First(),
-                Id = userProfile.Id,
-                AlmaMater = userProfile.AlmaMater,
-                City = userProfile.City,
-                DOB = userProfile.DOB,
-                Profession = userProfile.Profession,
-                Tags = userProfile.Tags,
-                Qualifications = userProfile.Qualifications,
-                ImageUrl = imageName
-              };
-
-              profile.Update(dbContext);
+              dbContext.UserExtendedProfile.Add(profile);
             }
 
             dbContext.SaveChanges();

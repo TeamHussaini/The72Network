@@ -37,7 +37,6 @@ C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Sy
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\System.Web.WebPages.Deployment.xml
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\System.Web.WebPages.Razor.xml
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\WebMatrix.Data.xml
-C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Microsoft.Web.WebPages.OAuth.xml
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\WebMatrix.WebData.xml
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\DotNetOpenAuth.AspNet.xml
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\DotNetOpenAuth.Core.xml
@@ -176,3 +175,6 @@ C:\Users\Mir Zaki\Documents\The72Network\the72network\72NetworkBootstraped\bin\E
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\EntityFramework.SqlServer.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\Microsoft.Web.Helpers.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\bin\EntityFramework.SqlServer.xml
+C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\obj\Debug\_72NetworkBootstraped.Migrations.InitialCreate.resources
+C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\obj\Debug\_72NetworkBootstraped.csproj.GenerateResource.Cache
+C:\Users\wali007hamza\Documents\Project\The72Network\72NetworkBootstraped\obj\Debug\_72NetworkBootstraped.Migrations.SecondChange.resources

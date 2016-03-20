@@ -2,7 +2,6 @@
 @{
   ViewBag.Title = "SignUp";
 }
-
 @using (Html.BeginForm())
 {
   @Html.AntiForgeryToken()
@@ -11,7 +10,7 @@
     ViewBag.Title = "Update Account";
   }
   <div class="container">
-    <div id="signupbox" style="margin-top:50px; margin-bottom:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div id="signupbox" style="margin-top:50px; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="panel-title">@ViewBag.Title</div>
@@ -19,35 +18,45 @@
         </div>
         <div style="padding-top:30px" class="panel-body">
           <div style="color:red">
-            @Html.ValidationSummary()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
           </div>
           <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
           <form id="loginform" class="form-horizontal" role="form">
-            <div style="margin-bottom: 25px" class="input-group">
+            <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
               @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username" })
             </div>
-            <div style="margin-bottom: 25px" class="input-group">
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 25px" class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
               @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", @placeholder = "Email Id" })
             </div>
-            <div style="margin-bottom: 25px" class="input-group">
+            @Html.ValidationMessageFor(m => m.EmailId, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 25px" class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
               @Html.TextBoxFor(m => m.MobilePhone, new { @class = "form-control", @placeholder = "PhoneNo." })
             </div>
-            <div style="margin-bottom: 15px" class="input-group">
+            @Html.ValidationMessageFor(m => m.MobilePhone, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 15px" class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-              @Html.TextBoxFor(m => m.Country, new { @class = "form-control", @placeholder = "Country" })
+              @Html.DropDownListFor(m => m.Country, ViewBag.Countries as SelectList, "Select Country", new { @class = "form-control" })
             </div>
-            <div style="border-top: 1px solid#888; padding-top:15px; margin-bottom: 20px" class="input-group">
+            @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
+
+            <div style="border-top: 1px solid#888; padding-top:15px; margin-top: 20px" class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
               @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
             </div>
-            <div style="margin-bottom: 25px" class="input-group">
+            <div style="margin-top: 25px" class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
               @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
             </div>
-            <div style="margin-bottom:10px" class="form-group">
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 10px" class="form-group">
               <!-- Button -->
               <div style="margin-top: 25px" class="controls">
                 <input type="submit" class="btn btn-success" value="@ViewBag.Title" id="btn-login" name="submit" />
@@ -59,4 +68,7 @@
       </div>
     </div>
   </div>
+}
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
 }
