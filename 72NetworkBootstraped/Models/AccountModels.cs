@@ -197,5 +197,8 @@ namespace _72NetworkBootstraped.Models
     public string ProviderUserId { get; set; }
   }
 
+    public class InboxModel
+    { }
+
   #endregion
 }

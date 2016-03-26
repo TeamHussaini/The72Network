@@ -72,10 +72,19 @@ namespace _72NetworkBootstraped.Controllers
       return View();
     }
 
-    //
-    // POST: /Account/SignUp
+        //
+        // inbox
+        
+        [AllowAnonymous]
+        public ActionResult Inbox(InboxModel model)
+        {
+            return View();
+        }
 
-    [HttpPost]
+        //
+        // POST: /Account/SignUp
+
+        [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public ActionResult SignUp(SignUpModel model)
