@@ -19,26 +19,52 @@ namespace _72NetworkBootstraped.Controllers
       return View();
     }
 
+    [Authorize]
     [HttpPost]
-    public JsonResult TagSearch(int[] tags)
+    public JsonResult TagSearch(int[] data)
     {
-      if (tags == null)
+      // Last element of data contains configuration instead of tags, tread carefully!
+      int configuration = data[data.Length - 1];
+      int[] tags = new int[data.Length-1];
+      Array.Copy(data, tags, data.Length-1);
+      if (tags.Length <= 0)
       {
         return null;
       }
       using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
       {
         Dictionary<int, Tag> tagMap = dbContext.Tag.ToDictionary(x => x.Id, x => x);
-        List<Tuple<int, string>> userList = new List<Tuple<int, string>>();
+        List<Tuple<int, string, string>> userList = new List<Tuple<int, string, string>>();
+        Dictionary<int, int> uniqueUsers = new Dictionary<int, int>();
         foreach (int id in tags)
         {
           Tag tag;
           if (tagMap.TryGetValue(id, out tag))
           {
-            userList.AddRange(tag.Users.Select(userProfile => new Tuple<int, string>(userProfile.UserProfile.Id, userProfile.UserProfile.UserName)));
+            foreach (UserExtendedProfile user in tag.Users)
+            {
+              if (!uniqueUsers.ContainsKey(user.UserProfile.Id))
+              {
+                userList.Add(Tuple.Create<int, string, string>(user.UserProfile.Id, user.UserProfile.UserName,
+                  user.ImageUrl));
+                uniqueUsers[user.UserProfile.Id] = 1;
+              }
+              else
+              {
+                uniqueUsers[user.UserProfile.Id]++;
+              }
+            }
           }
         }
 
+        // Configuration 0 : Union ; Configuration 1 : Intersection
+        if (configuration == 1)
+        {
+          // Intersecting
+          return Json(new JavaScriptSerializer().Serialize(userList.Where(x => uniqueUsers[x.Item1] == tags.Length)));
+        }
+
+        // Union
         return Json(new JavaScriptSerializer().Serialize(userList));
       }
     }

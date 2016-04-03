@@ -193,6 +193,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EntityFramework\UserProfileDatabaseContext.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -600,10 +601,12 @@
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\UserExtendedProfile.cshtml" />
     <Content Include="Views\Account\_ImageUploaderPartial.cshtml" />
+    <Content Include="Views\Account\Inbox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\ProfilePic\" />
+    <Folder Include="Views\Generic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

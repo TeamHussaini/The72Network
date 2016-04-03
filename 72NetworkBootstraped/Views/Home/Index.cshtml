@@ -134,14 +134,44 @@
             <div style="margin-top: 25px" class="input-group">
               @Html.ListBox("Tags", new MultiSelectList(ViewBag.TagList, "Id", "TagName"),
                   new { @class = "form-control input-group select tag-search-select" })
-              <div style="margin-left: 60px; float: right; margin-top:7px">
+              <div style="margin-left: 60px; float: right; margin-top: 7px">
                 <button type="button" class="btn btn-theme tag-search-btn"><i class="fa fa-search"></i></button>
               </div>
             </div>
+            <div class="search-option" title="Congfigures the mode of seach. Intersection of profiles or union">
+              <select id="tag-search-select">
+                <option value="0">Union</option>
+                <option value="1">Intersection</option>
+              </select>
+            </div>
           </form><!--//course-finder-form-->
           <br>
-          <br>
           <a class="read-more" href="AdvancedSearch.html">Advanced Search<i class="fa fa-chevron-right"></i></a>
+          <br>
+          <div id="search-result-box" class="col-md-12">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <div class="panel-title search-result"></div>
+                <div style="float: right; font-size: 80%; position: relative; top: -10px"></div>
+              </div>
+              <div style="padding-top: 30px" class="panel-body">
+                <div class="col-md-12">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>User Name</th>
+                          <th>Request</th>
+                          <th>Message</th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div><!--//section-content-->
       </section><!--//course-finder-->
     </div>
@@ -267,24 +297,54 @@
   @Scripts.Render("~/Scripts/chosen.jquery.min.js")
   <script>
     $(".select").chosen();
-    $(function() {
-      $(".tag-search-btn").click(function() {
+    $(function () {
+      var originalColor = $("#search-result-box .panel-title").css("color");
+      $(".tag-search-btn").click(function () {
+        var selected = $('.select').chosen().val();
+        selected.push($(".search-option #tag-search-select").val());
         $.ajax({
           url: '@(Url.Action("TagSearch", "Home"))',
           type: 'post',
           dataType: 'json',
           contentType: 'application/json; charset=utf-8',
-          data: JSON.stringify($('.select').chosen().val()),
-          success: function (json) {
-            alert(json);
+          data: JSON.stringify(selected),
+          success: function (jsonStr) {
+            var json = JSON.parse(jsonStr);
+            var jsonLength = json.length;
+            $("#search-result-box").show();
+            $("#search-result-box .panel-title").css("color", originalColor);
+            if (jsonLength <= 0) {
+              $("#search-result-box .panel-title").css("color", "red");
+              $("#search-result-box .panel-body").hide();
+            } else {
+              $("#search-result-box .panel-body").show();
+              searchResults(json);
+            }
+            $('#search-result-box .panel-title').text(jsonLength + " profile" + (jsonLength <= 1 ? "" : "s") + " found.");
             console.log(json);
           }
         });
       });
     });
+
+    function searchResults(json) {
+      var rows = new Array(), j = -1;
+      for (var key = 0, size = json.length; key < size; key++) {
+        rows[++j] = '<tr><td>';
+        rows[++j] = json[key].Item2;
+        rows[++j] = '</td><td>';
+        var jsonStr = json[key].Item1;
+        rows[++j] = "<a href = /Generic/SendRequest/" + jsonStr + "> Send Request </a>";
+        rows[++j] = '</td><td>';
+        rows[++j] = "<a href = /Generic/SendMessage/" + jsonStr + "> Send Message</a>";
+        rows[++j] = '</td></tr>';
+      }
+      $('#search-result-box .table-body').html(rows.join(''));
+    }
   </script>
 }
 @section Styles {
   @Styles.Render("~/Content/chosen.min.css")
+  @Styles.Render("~/Content/site.min.css")
   @Styles.Render("~/Content/sitealternate.min.css")
 }

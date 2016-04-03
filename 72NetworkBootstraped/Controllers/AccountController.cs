@@ -282,6 +282,7 @@ namespace _72NetworkBootstraped.Controllers
               return RedirectToAction("UserExtendedProfile", "Account");
             }
 
+            // TODO : Image name needs to be hashed.
             string imageExtension = imageName.Substring(imageName.IndexOf('.'));
             imageName = imageName.Substring(0, imageName.IndexOf('.')) + "_" + User.Identity.Name + imageExtension;
 
