@@ -50,11 +50,18 @@ namespace _72NetworkBootstraped.Controllers
       return View(model);
     }
 
-    //
-    // POST: /Account/SignOut
+    ////
+    //// POST: /Account/SignOut
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
+    //[HttpPost]
+    //[ValidateAntiForgeryToken]
+    //public ActionResult SignOut()
+    //{
+    //  WebSecurity.Logout();
+
+    //  return RedirectToAction("Index", "Home");
+    //}
+
     public ActionResult SignOut()
     {
       WebSecurity.Logout();
@@ -72,19 +79,18 @@ namespace _72NetworkBootstraped.Controllers
       return View();
     }
 
-        //
-        // inbox
-        
-        [AllowAnonymous]
-        public ActionResult Inbox(InboxModel model)
-        {
-            return View();
-        }
+    //
+    // inbox
 
-        //
-        // POST: /Account/SignUp
+    [AllowAnonymous]
+    public ActionResult Inbox(InboxModel model)
+    {
+      return View();
+    }
 
-        [HttpPost]
+    //
+    // POST: /Account/SignUp
+    [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public ActionResult SignUp(SignUpModel model)
@@ -181,7 +187,6 @@ namespace _72NetworkBootstraped.Controllers
     // POST: /Account/UserExtendedProfile
 
     [HttpPost]
-    [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public ActionResult UserExtendedProfile(UserExtendedProfileModel model)
     {
@@ -220,13 +225,12 @@ namespace _72NetworkBootstraped.Controllers
               selectedTag.Users.Add(profile);
             }
 
-            foreach (Tag tag in user.UserExtendedProfile.Tags)
-            {
-              
-            }
-
             if (user.UserExtendedProfile != null)
             {
+              foreach (Tag tag in user.UserExtendedProfile.Tags)
+              {
+                // This updates the tag
+              }
               profile.ImageUrl = user.UserExtendedProfile.ImageUrl;
               profile.Update(dbContext);
             }

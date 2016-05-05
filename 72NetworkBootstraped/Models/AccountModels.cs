@@ -71,7 +71,7 @@ namespace _72NetworkBootstraped.Models
 
   public class Entity
   {
-    [Key]
+    [Key][Column(Order=0)]
     [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
     public virtual int Id { get; set; }
   }

@@ -19,4 +19,9 @@
 .search-result {
   font-size: 12px;
 }
+
+.colorless-link {
+  text-decoration: none;
+  color: inherit;
+}
 /*# sourceMappingURL=Site.css.map */
