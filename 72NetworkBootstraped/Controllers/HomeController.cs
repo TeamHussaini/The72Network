@@ -34,7 +34,9 @@ namespace _72NetworkBootstraped.Controllers
       using (UserProfileDatabaseContext dbContext = new UserProfileDatabaseContext())
       {
         Dictionary<int, Tag> tagMap = dbContext.Tag.ToDictionary(x => x.Id, x => x);
-        List<Tuple<int, string, string>> userList = new List<Tuple<int, string, string>>();
+        List<TagSearchResult> userList = new List<TagSearchResult>();
+        UserProfile currentUser = dbContext.UserProfiles.FirstOrDefault(x => x.UserName == User.Identity.Name);
+        IList<int> requestedUsers = dbContext.Requests.Where(r => r.From.Id == currentUser.Id).Select(x => x.To.Id).ToList();
         Dictionary<int, int> uniqueUsers = new Dictionary<int, int>();
         foreach (int id in tags)
         {
@@ -43,25 +45,27 @@ namespace _72NetworkBootstraped.Controllers
           {
             foreach (UserExtendedProfile user in tag.Users)
             {
-              if (!uniqueUsers.ContainsKey(user.UserProfile.Id))
+              if (!uniqueUsers.ContainsKey(user.UserProfile.Id) && currentUser.Id != user.UserProfile.Id)
               {
-                userList.Add(Tuple.Create<int, string, string>(user.UserProfile.Id, user.UserProfile.UserName,
-                  user.ImageUrl));
+                userList.Add(new TagSearchResult(user.UserProfile.Id, user.UserProfile.UserName,
+                  user.ImageUrl, requestSent: requestedUsers.Contains(user.UserProfile.Id)));
                 uniqueUsers[user.UserProfile.Id] = 1;
               }
               else
               {
-                uniqueUsers[user.UserProfile.Id]++;
+                if (uniqueUsers.ContainsKey(user.UserProfile.Id)) 
+                {
+                  uniqueUsers[user.UserProfile.Id]++;
+                }
               }
             }
           }
         }
-
         // Configuration 0 : Union ; Configuration 1 : Intersection
         if (configuration == 1)
         {
-          // Intersecting
-          return Json(new JavaScriptSerializer().Serialize(userList.Where(x => uniqueUsers[x.Item1] == tags.Length)));
+          // Intersection
+          return Json(new JavaScriptSerializer().Serialize(userList.Where(x => uniqueUsers[x.ProfileId] == tags.Length)));
         }
 
         // Union

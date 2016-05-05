@@ -296,6 +296,7 @@
   @Scripts.Render("~/bundles/jqueryval")
   @Scripts.Render("~/Scripts/chosen.jquery.min.js")
   <script>
+
     $(".select").chosen();
     $(function () {
       var originalColor = $("#search-result-box .panel-title").css("color");
@@ -331,16 +332,59 @@
       var rows = new Array(), j = -1;
       for (var key = 0, size = json.length; key < size; key++) {
         rows[++j] = '<tr><td>';
-        rows[++j] = json[key].Item2;
+        rows[++j] = json[key].UserName;
         rows[++j] = '</td><td>';
-        var jsonStr = json[key].Item1;
-        rows[++j] = "<a href = /Generic/SendRequest/" + jsonStr + "> Send Request </a>";
+        var jsonStr = json[key].ProfileId;
+        var reqSpanStr = json[key].RequestSentToThisUserByCurrentUser ? "<span class=\"label label-success\"><i class=\"fa fa-check-circle\"> Request Sent</i></span>" : "<span><p><span class=\"label label-primary \"> <a class='colorless-link'>Send Request</a></span></p></span>";
+        var reqIdStr = json[key].RequestSentToThisUserByCurrentUser ? "" : jsonStr;
+        var reqElementId = 'tag-SendRequest-' + (j + 1);
+        rows[++j] = "<div id=\"" + reqElementId + "\" onclick=\"processRequestSending(" + reqIdStr + ",\'" + reqElementId + "\')\">" + reqSpanStr + "</div>";
         rows[++j] = '</td><td>';
-        rows[++j] = "<a href = /Generic/SendMessage/" + jsonStr + "> Send Message</a>";
+        var msgSpanStr = json[key].MessageSentToThisUserByCurrentUser ? "<span class=\"label label-success\"><i class=\"fa fa-check-circle\"> Message Sent</i></span>" : "<span><p><span class=\"label label-primary \"> <a class='colorless-link'>Send Message</a></span></p></span>";
+        var msgIdStr = json[key].MessageSentToThisUserByCurrentUser ? "" : jsonStr;
+        var msgElementId = 'tag-SendMessage-' + (j + 1);
+        rows[++j] = "<div id=\"" + msgElementId + "\" onclick=\"processMessageSending(" + msgIdStr + ",\'" + msgElementId + "\')\">" + msgSpanStr + "</div>";
         rows[++j] = '</td></tr>';
       }
       $('#search-result-box .table-body').html(rows.join(''));
     }
+
+    function processRequestSending(id, elementId) {
+      if (id != "") {
+        $.ajax({
+          url: '@(Url.Action("SendRequest", "Generic"))/' + id,
+          type: 'post',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          success: function (jsonStr) {
+            var json = JSON.parse(jsonStr);
+            if (json.success) {
+              $('#' + elementId).html("<span class=\"label label-success\"><i class=\"fa fa-check-circle\"> Request Sent</i></span>");
+              $('#' + elementId).attr("onclick", '')
+            }
+          }
+        });
+      }
+    }
+
+    function processMessageSending(id, elementId) {
+      if (id != "") {
+        $.ajax({
+          url: '@(Url.Action("SendMessage", "Generic"))/' + id,
+          type: 'post',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          success: function (jsonStr) {
+            var json = JSON.parse(jsonStr);
+            if (json.success) {
+              $('#' + elementId).html("<span class=\"label label-success\"><i class=\"fa fa-check-circle\"> Message Sent</i></span>");
+              $('#' + elementId).attr("onclick", '')
+            }
+          }
+        });
+      }
+    }
+
   </script>
 }
 @section Styles {

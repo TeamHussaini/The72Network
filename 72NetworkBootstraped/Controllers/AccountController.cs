@@ -170,7 +170,8 @@ namespace _72NetworkBootstraped.Controllers
           DOB = user.UserExtendedProfile.DOB,
           Profession = user.UserExtendedProfile.Profession,
           Qualifications = user.UserExtendedProfile.Qualifications,
-          ImageUrl = user.UserExtendedProfile.ImageUrl
+          ImageUrl = user.UserExtendedProfile.ImageUrl,
+          Description = user.UserExtendedProfile.Description
         };
 
         model.Tags = new List<int>();
@@ -214,6 +215,7 @@ namespace _72NetworkBootstraped.Controllers
               DOB = model.DOB,
               Profession = model.Profession,
               Qualifications = model.Qualifications,
+              Description = model.Description,
               ImageUrl = string.Empty,
               Tags = new List<Tag>()
             };

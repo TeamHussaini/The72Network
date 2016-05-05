@@ -200,18 +200,37 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603191520291_InitialCreate.cs" />
-    <Compile Include="Migrations\201603191520291_InitialCreate.Designer.cs">
+    <Compile Include="Images\Migrations\201603191520291_InitialCreate.cs" />
+    <Compile Include="Images\Migrations\201603191520291_InitialCreate.Designer.cs">
       <DependentUpon>201603191520291_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603192148377_SecondChange.cs" />
-    <Compile Include="Migrations\201603192148377_SecondChange.Designer.cs">
+    <Compile Include="Images\Migrations\201603192148377_SecondChange.cs" />
+    <Compile Include="Images\Migrations\201603192148377_SecondChange.Designer.cs">
       <DependentUpon>201603192148377_SecondChange.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Images\Migrations\201605021536532_ExtendingDB.cs" />
+    <Compile Include="Images\Migrations\201605021536532_ExtendingDB.Designer.cs">
+      <DependentUpon>201605021536532_ExtendingDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Images\Migrations\201605040454138_socialManager.cs" />
+    <Compile Include="Images\Migrations\201605040454138_socialManager.Designer.cs">
+      <DependentUpon>201605040454138_socialManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Images\Migrations\201605041816354_fixingSocialManager.cs" />
+    <Compile Include="Images\Migrations\201605041816354_fixingSocialManager.Designer.cs">
+      <DependentUpon>201605041816354_fixingSocialManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Images\Migrations\Configuration.cs" />
+    <Compile Include="Migrations\201605050548552_addingDescription.cs" />
+    <Compile Include="Migrations\201605050548552_addingDescription.Designer.cs">
+      <DependentUpon>201605050548552_addingDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\GenericModels.cs" />
+    <Compile Include="Models\SocialModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\DBExtensionMethods.cs" />
+    <Compile Include="Shared\TagSearchResult.cs" />
     <Compile Include="Shared\Util.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -602,21 +621,35 @@
     <Content Include="Views\Account\UserExtendedProfile.cshtml" />
     <Content Include="Views\Account\_ImageUploaderPartial.cshtml" />
     <Content Include="Views\Account\Inbox.cshtml" />
+    <Content Include="Views\Generic\RequestsPage.cshtml" />
+    <Content Include="Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Views\Generic\Connections.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\ProfilePic\" />
-    <Folder Include="Views\Generic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603191520291_InitialCreate.resx">
+    <EmbeddedResource Include="Images\Migrations\201603191520291_InitialCreate.resx">
       <DependentUpon>201603191520291_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603192148377_SecondChange.resx">
+    <EmbeddedResource Include="Images\Migrations\201603192148377_SecondChange.resx">
       <DependentUpon>201603192148377_SecondChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\Migrations\201605021536532_ExtendingDB.resx">
+      <DependentUpon>201605021536532_ExtendingDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\Migrations\201605040454138_socialManager.resx">
+      <DependentUpon>201605040454138_socialManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\Migrations\201605041816354_fixingSocialManager.resx">
+      <DependentUpon>201605041816354_fixingSocialManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605050548552_addingDescription.resx">
+      <DependentUpon>201605050548552_addingDescription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

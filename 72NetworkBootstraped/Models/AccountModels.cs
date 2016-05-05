@@ -52,6 +52,8 @@ namespace _72NetworkBootstraped.Models
 
     public string City { get; set; }
 
+    public string Description { get; set; }
+
     public string ImageUrl { get; set; }
 
     public virtual UserProfile UserProfile { get; set; }
@@ -97,8 +99,8 @@ namespace _72NetworkBootstraped.Models
     public string OldPassword { get; set; }
 
     [Required]
-    [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
     [DataType(DataType.Password)]
+    [StringLength(100, ErrorMessage = "Min password length : {2}, Max password length : {1}", MinimumLength = 6)]
     [Display(Name = "New password")]
     public string NewPassword { get; set; }
 
@@ -147,7 +149,7 @@ namespace _72NetworkBootstraped.Models
     public string Country { get; set; }
 
     [Required]
-    [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+    [StringLength(100, ErrorMessage = "Min password length : {2}, Max password length : {1}", MinimumLength = 6)]
     [DataType(DataType.Password)]
     [Display(Name = "Password")]
     public string Password { get; set; }
@@ -186,7 +188,39 @@ namespace _72NetworkBootstraped.Models
     [Display(Name = "Tags")]
     public List<int> Tags { get; set; }
 
+    [Required]
+    [Display(Name = "Description")]
+    [StringLength(500, ErrorMessage = "{0} length should not exceed {1} characters.")]
+    public string Description { get; set; }
+
     [Display(Name = "Image")]
+    public string ImageUrl { get; set; }
+  }
+
+  public class CompleteUserProfileViewModel
+  {
+    public string UserName { get; set; }
+
+    public string EmailId { get; set; }
+
+    public string MobilePhone { get; set; }
+
+    public string Country { get; set; }
+
+    public string Profession { get; set; }
+
+    public string Qualifications { get; set; }
+
+    public string AlmaMater { get; set; }
+
+    public string DOB { get; set; }
+
+    public string City { get; set; }
+
+    public List<string> Tags { get; set; }
+
+    public string Description { get; set; }
+
     public string ImageUrl { get; set; }
   }
 

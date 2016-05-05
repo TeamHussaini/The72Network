@@ -77,6 +77,12 @@
             @Html.ValidationMessageFor(m => m.DOB, "", new { @class = "text-danger" })
 
             <div style="margin-top: 25px" class="input-group">
+              <span class="input-group-addon">@Html.LabelFor(m => m.Description, new { @title = "Please tell us something about yourself, this will help in building connections." })</span>
+              @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "500 characters remaining" })
+            </div>
+            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+
+            <div style="margin-top: 25px" class="input-group">
               <span class="input-group-addon">@Html.LabelFor(m => m.Tags)</span>
               @Html.ListBox("Tags", new MultiSelectList(ViewBag.TagList, "Id", "TagName", Model != null ? Model.Tags.AsEnumerable() : null),
                 new { @class = "form-control input-group select", @placeholder = "Select Tags" })
