@@ -1,3 +1,9 @@
-The72Network/Images/ProfilePic
-The72Network/App_Data/
+The72Network/
+72NetworkBootstraped/Images/ProfilePic
+72NetworkBootstraped/App_Data/
+72NetworkBootstraped/obj/
+72NetworkBootstraped/bin/
+72NetworkBootstraped/Properties/PublishProfiles/
+the72network_com_certs/
 packages/
+

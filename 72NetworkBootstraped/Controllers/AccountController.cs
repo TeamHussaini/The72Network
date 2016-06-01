@@ -28,6 +28,7 @@ namespace _72NetworkBootstraped.Controllers
     [AllowAnonymous]
     public ActionResult SignIn(string returnUrl)
     {
+      Session["ActiveNavbar"] = "Home";
       ViewBag.ReturnUrl = returnUrl;
       return View();
     }

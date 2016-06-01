@@ -28,10 +28,8 @@ namespace _72NetworkBootstraped.Models
   [Table("Messages")]
   public class Messages : Entity
   {
-    [Key][Column(Order=1)]
     public UserProfile From { get; set; }
 
-    [Key][Column(Order=2)]
     public UserProfile To { get; set; }
 
     public DateTime Time { get; set; }
@@ -39,6 +37,9 @@ namespace _72NetworkBootstraped.Models
     public string Message {get; set;}
 
     public Guid Correlation { get; set; }
+
+    [EnumDataType(typeof(MessageState))]
+    public MessageState State { get; set; }
   }
 
   [Table("SocialManager")]
@@ -110,6 +111,13 @@ namespace _72NetworkBootstraped.Models
     Accepted = 1,
 
     Declined = 2,
+  }
+
+  public enum MessageState
+  {
+    Unseen = 0,
+
+    Seen = 1
   }
 
   public enum SocialTypes

@@ -40,7 +40,7 @@ namespace _72NetworkBootstraped
     {
       public SimpleMembershipInitializer()
       {
-        using (var context = new UsersContext())
+        using (var context = new UserProfileDatabaseContext())
           context.UserProfiles.Find(1);
 
         if (!WebSecurity.Initialized)

@@ -54,20 +54,40 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.3\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -92,16 +112,36 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -110,17 +150,22 @@
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -200,30 +245,34 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Images\Migrations\201603191520291_InitialCreate.cs" />
-    <Compile Include="Images\Migrations\201603191520291_InitialCreate.Designer.cs">
+    <Compile Include="Migrations\201603191520291_InitialCreate.cs" />
+    <Compile Include="Migrations\201603191520291_InitialCreate.Designer.cs">
       <DependentUpon>201603191520291_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Images\Migrations\201603192148377_SecondChange.cs" />
-    <Compile Include="Images\Migrations\201603192148377_SecondChange.Designer.cs">
+    <Compile Include="Migrations\201603192148377_SecondChange.cs" />
+    <Compile Include="Migrations\201603192148377_SecondChange.Designer.cs">
       <DependentUpon>201603192148377_SecondChange.cs</DependentUpon>
     </Compile>
-    <Compile Include="Images\Migrations\201605021536532_ExtendingDB.cs" />
-    <Compile Include="Images\Migrations\201605021536532_ExtendingDB.Designer.cs">
+    <Compile Include="Migrations\201605021536532_ExtendingDB.cs" />
+    <Compile Include="Migrations\201605021536532_ExtendingDB.Designer.cs">
       <DependentUpon>201605021536532_ExtendingDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Images\Migrations\201605040454138_socialManager.cs" />
-    <Compile Include="Images\Migrations\201605040454138_socialManager.Designer.cs">
+    <Compile Include="Migrations\201605040454138_socialManager.cs" />
+    <Compile Include="Migrations\201605040454138_socialManager.Designer.cs">
       <DependentUpon>201605040454138_socialManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Images\Migrations\201605041816354_fixingSocialManager.cs" />
-    <Compile Include="Images\Migrations\201605041816354_fixingSocialManager.Designer.cs">
+    <Compile Include="Migrations\201605041816354_fixingSocialManager.cs" />
+    <Compile Include="Migrations\201605041816354_fixingSocialManager.Designer.cs">
       <DependentUpon>201605041816354_fixingSocialManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Images\Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\201605050548552_addingDescription.cs" />
     <Compile Include="Migrations\201605050548552_addingDescription.Designer.cs">
       <DependentUpon>201605050548552_addingDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605070654174_MessageSeenFeature.cs" />
+    <Compile Include="Migrations\201605070654174_MessageSeenFeature.Designer.cs">
+      <DependentUpon>201605070654174_MessageSeenFeature.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\GenericModels.cs" />
@@ -234,6 +283,9 @@
     <Compile Include="Shared\Util.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="B202ECD9C4723221651C7350C47629F8.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\chosen-sprite%402x.png" />
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
@@ -405,7 +457,13 @@
     <Content Include="Content\SiteAlternate.css.map">
       <DependentUpon>SiteAlternate.css</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FabricDeployment.pubxml" />
+    <None Include="Properties\PublishProfiles\The72Network.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\GlowingLogo.jpg" />
+    <Content Include="Images\icon.png" />
+    <Content Include="Images\Intro1.jpg" />
+    <Content Include="Images\Intro2.jpg" />
     <Content Include="Images\Logo.jpg" />
     <Content Include="Images\person-placeholder.jpg" />
     <Content Include="Scripts\chosen.jquery.js" />
@@ -566,7 +624,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\plugins\bootstrap\.editorconfig" />
     <Content Include="Scripts\plugins\bootstrap\.hound.yml" />
     <Content Include="Scripts\plugins\bootstrap\.travis.yml" />
@@ -633,23 +693,26 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Images\Migrations\201603191520291_InitialCreate.resx">
+    <EmbeddedResource Include="Migrations\201603191520291_InitialCreate.resx">
       <DependentUpon>201603191520291_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\Migrations\201603192148377_SecondChange.resx">
+    <EmbeddedResource Include="Migrations\201603192148377_SecondChange.resx">
       <DependentUpon>201603192148377_SecondChange.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\Migrations\201605021536532_ExtendingDB.resx">
+    <EmbeddedResource Include="Migrations\201605021536532_ExtendingDB.resx">
       <DependentUpon>201605021536532_ExtendingDB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\Migrations\201605040454138_socialManager.resx">
+    <EmbeddedResource Include="Migrations\201605040454138_socialManager.resx">
       <DependentUpon>201605040454138_socialManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\Migrations\201605041816354_fixingSocialManager.resx">
+    <EmbeddedResource Include="Migrations\201605041816354_fixingSocialManager.resx">
       <DependentUpon>201605041816354_fixingSocialManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605050548552_addingDescription.resx">
       <DependentUpon>201605050548552_addingDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605070654174_MessageSeenFeature.resx">
+      <DependentUpon>201605070654174_MessageSeenFeature.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

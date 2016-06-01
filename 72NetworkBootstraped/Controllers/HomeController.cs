@@ -15,6 +15,7 @@ namespace _72NetworkBootstraped.Controllers
   {
     public ActionResult Index()
     {
+      Session["ActiveNavbar"] = "Home";
       ViewBag.TagList = Util.TagList;
       return View();
     }
