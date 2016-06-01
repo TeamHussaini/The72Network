@@ -19,9 +19,8 @@
 .search-result {
   font-size: 12px;
 }
-
-.colorless-link {
-  text-decoration: none;
-  color: inherit;
+.intro-image {
+  width: 1140px;
+  height: 350px;
 }
 /*# sourceMappingURL=Site.css.map */
