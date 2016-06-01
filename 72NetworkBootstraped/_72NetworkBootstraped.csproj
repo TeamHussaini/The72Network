@@ -283,9 +283,6 @@
     <Compile Include="Shared\Util.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="B202ECD9C4723221651C7350C47629F8.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\chosen-sprite%402x.png" />
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
