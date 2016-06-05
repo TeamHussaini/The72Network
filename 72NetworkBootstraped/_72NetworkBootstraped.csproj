@@ -16,10 +16,10 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>43302</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -153,7 +153,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Ht/ssltp.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
@@ -457,11 +457,11 @@
     <None Include="Properties\PublishProfiles\FabricDeployment.pubxml" />
     <None Include="Properties\PublishProfiles\The72Network.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Images\GlowingLogo.jpg" />
     <Content Include="Images\icon.png" />
     <Content Include="Images\Intro1.jpg" />
     <Content Include="Images\Intro2.jpg" />
     <Content Include="Images\Logo.jpg" />
+    <Content Include="Images\LogoGlow.jpg" />
     <Content Include="Images\person-placeholder.jpg" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
@@ -730,7 +730,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3568</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3568/</IISUrl>
+          <IISUrl>https://localhost:44302/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

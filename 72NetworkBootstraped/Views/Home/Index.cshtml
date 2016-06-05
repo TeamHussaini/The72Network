@@ -14,17 +14,17 @@
       <li>
         <img class="intro-image" src="~/Images/Intro1.jpg" alt="" />
         <p class="flex-caption">
-          <span class="main">This is where the images showing some highlights will go.</span>
+          <span class="main">We draw our inspiration from them.</span>
           <br />
-          <span class="secondary clearfix">Generic Images</span>
+          <span class="secondary clearfix">In this quest of knowledge.</span>
         </p>
       </li>
       <li>
         <img class="intro-image" src="~/Images/Intro2.jpg" alt="" />
         <p class="flex-caption">
-          <span class="main">Other Images</span>
+          <span class="main">Brothers in humanity</span>
           <br />
-          <span class="secondary clearfix">Can have as many images as we can</span>
+          <span class="secondary clearfix">Let's grow together.</span>
         </p>
       </li>
     </ul><!--//slides-->
@@ -33,13 +33,11 @@
     <div class="col-md-9">
       <h1 class="section-heading">What this site is about.</h1>
       <p>
-        This site is a humble attempt by fresh college grads to bring together shia brothers. We plan to project this as a platform
-        where veterans can guide the younger generation to become successfull in life and help the community.
-        We need your help in this venture. Please complete your profile and help this cause.
+        This website is a humble attempt passionately inspired by the brave wise & pious 72 companions of the Grandson of Holy Prophet Mohammad (PBUH), Imam Hussain(A.S), who in Karbala laid their lives to protect the human race from a catastrophic destiny ... and today we have united together to carry forth that mission of peace and humanity to bring together professionals, business personnel and academicians together, to aid each other in creating a conducive environment hence opportunity for mutual development. We plan to project this as a platform where veterans can guide the younger generation of professionals to become successful in life and in turn continue helping others. We need all of you to help in this venture. You can start by completing your profile and help this cause. God willing we shall be adding more relevant info to the site for better understanding and ease. Thank you for your time & energy. The 72 Network team.
       </p>
     </div>
     <div class="col-md-3">
-      <a class="btn btn-cta" href="#"><i class="fa fa-play-circle"></i>Complete Profile.</a>
+      <a class="btn btn-cta" href="@Url.Action("UserExtendedProfile", "Account")"><i class="fa fa-play-circle"></i>Complete Profile.</a>
     </div>
   </section><!--//promo-->
   <section class="news">
@@ -133,7 +131,10 @@
           <form id="loginform" class="form-horizontal" role="form">
             <div style="margin-top: 25px" class="input-group">
               @Html.ListBox("Tags", new MultiSelectList(ViewBag.TagList, "Id", "TagName"),
-                  new { @class = "form-control input-group select tag-search-select" })
+                  new
+                  {
+                    @class = "form-control input-group select tag-search-select"
+                  })
               <div style="margin-left: 60px; float: right; margin-top: 7px">
                 <button type="button" class="btn btn-theme tag-search-btn"><i class="fa fa-search"></i></button>
               </div>

@@ -5,7 +5,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-  <title>@ViewBag.Title - The72Network. A website where shia professionals can grow their contacts.</title>
+  <title>@ViewBag.Title - The72Network. A website where professionals can grow their contacts.</title>
   <!-- Meta -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,7 +53,7 @@
       </div><!--//top-bar-->
       <div class="header-main container">
         <h1 class="logo col-md-4 col-sm-4">
-          <a href="index.html"><img id="logo" src="~/Images/logo.jpg" alt="Logo"></a>
+          <a href="@Url.Action("Index", "Home")"><img id="logo" src="~/Images/logo.jpg" alt="Logo" onmouseover="hover(this);" onmouseout="unhover(this);"></a>
         </h1><!--//logo-->
         <div class="info col-md-8 col-sm-8">
           <ul class="menu-top navbar-right hidden-xs">
@@ -89,6 +89,17 @@
   <script type="text/javascript" src="~/Scripts/Plugins/jflickrfeed/jflickrfeed.min.js"></script>
   <script type="text/javascript" src="~/Scripts/js/main.js"></script>
   @RenderSection("scripts", required: false)
+  <script>
+
+    function hover(element) {
+      element.setAttribute('src', "/Images/LogoGlow.jpg");
+    }
+
+    function unhover(element) {
+      element.setAttribute('src', "/Images/Logo.jpg");
+    }
+
+  </script>
   @RenderSection("styles", required: false)
 </body>
 </html>
