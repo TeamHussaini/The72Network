@@ -141,7 +141,8 @@ namespace _72NetworkBootstraped.Models
 
     [Required]
     [Display(Name = "Mobile Phone")]
-    [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
+    //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
+    [RegularExpression(@"^\(?\d{3}\)?-? *\d{3}-? *-?\d{4}$", ErrorMessage = "Entered phone format is not valid.")]
     public string MobilePhone { get; set; }
 
     [Required]

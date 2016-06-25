@@ -126,7 +126,7 @@ namespace _72NetworkBootstraped.Controllers
           ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
         }
       }
-
+      ViewBag.Countries = new SelectList(Util.ListOfCountries());
       // If we got this far, something failed, redisplay form
       return View(model);
     }
@@ -265,7 +265,8 @@ namespace _72NetworkBootstraped.Controllers
           ModelState.AddModelError("", e.StackTrace);
         }
       }
-
+      ViewBag.TagList = Util.TagList;
+      ViewBag.ProfessionList = new SelectList(Util.ListOfProfessions);
       // If we got this far, something failed, redisplay form
       return View(model);
     }
