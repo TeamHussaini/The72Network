@@ -1,0 +1,5 @@
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Shared\bin\Debug\The72Network.Web.Shared.dll
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Shared\bin\Debug\The72Network.Web.Shared.pdb
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Shared\obj\Debug\The72Network.Web.Shared.csprojResolveAssemblyReference.cache
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Shared\obj\Debug\The72Network.Web.Shared.dll
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Shared\obj\Debug\The72Network.Web.Shared.pdb

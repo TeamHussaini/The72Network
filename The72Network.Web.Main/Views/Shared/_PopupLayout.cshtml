@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>@ViewBag.Title</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="~/Content/Template/bootstrap/css/bootstrap.min.css">
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="~/Content/Template/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="~/Content/Template/flexslider/flexslider.css">
+  <link rel="stylesheet" href="~/Content/Template/pretty-photo/css/prettyPhoto.css">
+  <!-- Theme CSS -->
+  <link id="theme-style" rel="stylesheet" href="~/Content/Template/css/styles.css">
+</head>
+
+<body class="home-page">
+  @RenderBody()
+  <!-- Javascript -->
+  <script type="text/javascript" src="~/Scripts/Plugins/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/bootstrap-hover-dropdown.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/back-to-top.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/jquery-placeholder/jquery.placeholder.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/pretty-photo/js/jquery.prettyPhoto.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/flexslider/jquery.flexslider-min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/jflickrfeed/jflickrfeed.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/js/main.js"></script>
+  @RenderSection("scripts", required: false)
+  @RenderSection("styles", required: false)
+</body>
+</html>
+

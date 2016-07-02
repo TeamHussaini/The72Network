@@ -1,0 +1,10 @@
+﻿@using (Html.BeginForm("UploadImage", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+  @Html.AntiForgeryToken()
+  @Html.ValidationSummary()
+  <fieldset>
+    <br />
+    <input type="file" name="file" id="file" style="width: 80%;" /> <br />
+    <input type="submit" class="btn btn-info" value=@Model />
+  </fieldset>
+}

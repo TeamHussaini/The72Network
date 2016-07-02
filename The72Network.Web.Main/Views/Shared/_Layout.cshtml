@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <title>@ViewBag.Title - The72Network. A website where professionals can grow their contacts.</title>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="~/Images/icon.png">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="~/Content/Template/bootstrap/css/bootstrap.min.css">
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="~/Content/Template/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="~/Content/Template/flexslider/flexslider.css">
+  <link rel="stylesheet" href="~/Content/Template/pretty-photo/css/prettyPhoto.css">
+  <!-- Theme CSS -->
+  <link id="theme-style" rel="stylesheet" href="~/Content/Template/css/styles.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="home-page">
+  <div class="wrapper">
+    <!-- ******HEADER****** -->
+    <header class="header">
+      <div class="top-bar">
+        <div class="container">
+          <ul class="social-icons col-md-6 col-sm-6 col-xs-12 hidden-xs">
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li class="row-end"><a href="#"><i class="fa fa-rss"></i></a></li>
+          </ul><!--//social-icons-->
+          <form class="pull-right search-form" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search the site...">
+            </div>
+            <button type="submit" class="btn btn-theme">Go</button>
+          </form>
+        </div>
+      </div><!--//top-bar-->
+      <div class="header-main container">
+        <h1 class="logo col-md-4 col-sm-4">
+          <a href="@Url.Action("Index", "Home")"><img id="logo" src="~/Images/logo.jpg" alt="Logo" onmouseover="hover(this);" onmouseout="unhover(this);"></a>
+        </h1><!--//logo-->
+        <div class="info col-md-8 col-sm-8">
+          <ul class="menu-top navbar-right hidden-xs">
+            <li class="divider"><a href="index.html">Home</a></li>
+            <li class="divider"><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul><!--//menu-top-->
+          <br />
+          <div class="contact pull-right">
+            <p class="phone"><i class="fa fa-phone"></i>Call us today +91 900000123</p>
+            <p class="email"><i class="fa fa-envelope"></i><a href="#">enquiry@The72Network.com</a></p>
+          </div><!--//contact-->
+        </div><!--//info-->
+      </div><!--//header-main-->
+    </header><!--//header-->
+    <!-- ******NAV****** -->
+    @Html.Action("NavbarData", "Generic")
+    @RenderBody()
+  </div><!--//wrapper-->
+  <!-- ******FOOTER****** -->
+  @Html.Partial("_FooterPartial")
+  <!-- *****CONFIGURE STYLE****** -->
+  @Html.Partial("_ConfigureStylePartial")
+  <!-- Javascript -->
+  <script type="text/javascript" src="~/Scripts/Plugins/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/bootstrap-hover-dropdown.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/back-to-top.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/jquery-placeholder/jquery.placeholder.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/pretty-photo/js/jquery.prettyPhoto.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/flexslider/jquery.flexslider-min.js"></script>
+  <script type="text/javascript" src="~/Scripts/Plugins/jflickrfeed/jflickrfeed.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/js/main.js"></script>
+  @RenderSection("scripts", required: false)
+  <script>
+
+    function hover(element) {
+      element.setAttribute('src', "/Images/LogoGlow.jpg");
+    }
+
+    function unhover(element) {
+      element.setAttribute('src', "/Images/Logo.jpg");
+    }
+
+  </script>
+  @RenderSection("styles", required: false)
+</body>
+</html>
+

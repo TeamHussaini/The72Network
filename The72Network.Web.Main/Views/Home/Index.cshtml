@@ -1,0 +1,395 @@
+﻿@{
+  ViewBag.Title = "Home";
+}
+
+@if (!Request.IsAuthenticated)
+{
+  Response.Redirect("~/Account/SignIn");
+}
+
+<!-- ******CONTENT****** -->
+<div class="content container">
+  <div id="promo-slider" class="slider flexslider">
+    <ul class="slides">
+      <li>
+        <img class="intro-image" src="~/Images/Intro1.jpg" alt="" />
+        <p class="flex-caption">
+          <span class="main">We draw our inspiration from them.</span>
+          <br />
+          <span class="secondary clearfix">In this quest of knowledge.</span>
+        </p>
+      </li>
+      <li>
+        <img class="intro-image" src="~/Images/Intro2.jpg" alt="" />
+        <p class="flex-caption">
+          <span class="main">Brothers in humanity</span>
+          <br />
+          <span class="secondary clearfix">Let's grow together.</span>
+        </p>
+      </li>
+    </ul><!--//slides-->
+  </div><!--//flexslider-->
+  <section class="promo box box-dark">
+    <div class="col-md-9">
+      <h1 class="section-heading">What this site is about.</h1>
+      <p>
+        This website is a humble attempt passionately inspired by the brave wise & pious 72 companions of the Grandson of Holy Prophet Mohammad (PBUH), Imam Hussain(A.S), who in Karbala laid their lives to protect the human race from a catastrophic destiny ... and today we have united together to carry forth that mission of peace and humanity to bring together professionals, business personnel and academicians together, to aid each other in creating a conducive environment hence opportunity for mutual development. We plan to project this as a platform where veterans can guide the younger generation of professionals to become successful in life and in turn continue helping others. We need all of you to help in this venture. You can start by completing your profile and help this cause. God willing we shall be adding more relevant info to the site for better understanding and ease. Thank you for your time & energy. The 72 Network team.
+      </p>
+    </div>
+    <div class="col-md-3">
+      <a class="btn btn-cta" href="@Url.Action("UserExtendedProfile", "Account")"><i class="fa fa-play-circle"></i>Complete Profile.</a>
+    </div>
+  </section><!--//promo-->
+  <section class="news">
+    <h1 class="section-heading text-highlight"><span class="line">Latest News</span></h1>
+    <div class="carousel-controls">
+      <a class="prev" href="#news-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+      <a class="next" href="#news-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+    </div><!--//carousel-controls-->
+    <div class="section-content clearfix">
+      <div id="news-carousel" class="news-carousel carousel slide">
+        <div class="carousel-inner">
+          <div class="item active">
+            <div class="col-md-4 news-item">
+              <h2 class="title"><a href="news-single.html">News 1</a></h2>
+              <img class="thumb" src="~/Content/Template/images/news/news-thumb-1.jpg" alt="" />
+              <p>This list is hardcoded. Will have to make it dynamic once we have some source of getting and curating news.</p>
+              <a class="read-more" href="news-single.html">Read more<i class="fa fa-chevron-right"></i></a>
+            </div><!--//news-item-->
+            <div class="col-md-4 news-item">
+              <h2 class="title"><a href="news-single.html">News 2</a></h2>
+              <p>Just filling up something.</p>
+              <a class="read-more" href="news-single.html">Read more<i class="fa fa-chevron-right"></i></a>
+              <img class="thumb" src="~/Content/Template/images/news/news-thumb-2.jpg" alt="" />
+            </div><!--//news-item-->
+            <div class="col-md-4 news-item">
+              <h2 class="title"><a href="news-single.html">News 3</a></h2>
+              <p>Just filling up something.</p>
+              <a class="read-more" href="news-single.html">Read more<i class="fa fa-chevron-right"></i></a>
+              <img class="thumb" src="~/Content/Template/images/news/news-thumb-3.jpg" alt="" />
+            </div><!--//news-item-->
+          </div><!--//item-->
+          <div class="item">
+            <div class="col-md-4 news-item">
+              <h2 class="title"><a href="news-single.html">News 4</a></h2>
+              <img class="thumb" src="~/Content/Template/images/news/news-thumb-4.jpg" alt="" />
+              <p>These news will be hidden, unless brought in focus.</p>
+              <a class="read-more" href="news-single.html">Read more<i class="fa fa-chevron-right"></i></a>
+            </div><!--//news-item-->
+            <div class="col-md-4 news-item">
+              <h2 class="title"><a href="news-single.html">News 5</a></h2>
+              <p>Just filling up something.</p>
+              <a class="read-more" href="news-single.html">Read more<i class="fa fa-chevron-right"></i></a>
+              <img class="thumb" src="~/Content/Template/images/news/news-thumb-5.jpg" alt="" />
+            </div><!--//news-item-->
+            <div class="col-md-4 news-item">
+              <h2 class="title"><a href="news-single.html">News 6</a></h2>
+              <p>Just filling up something.</p>
+              <a class="read-more" href="news-single.html">Read more<i class="fa fa-chevron-right"></i></a>
+              <img class="thumb" src="~/Content/Template/images/news/news-thumb-6.jpg" alt="" />
+            </div><!--//news-item-->
+          </div><!--//item-->
+        </div><!--//carousel-inner-->
+      </div><!--//news-carousel-->
+    </div><!--//section-content-->
+  </section><!--//news-->
+  <div class="row cols-wrapper">
+    <div class="col-md-3">
+      <section class="events">
+        <h1 class="section-heading text-highlight"><span class="line">Events</span></h1>
+        <div class="section-content">
+          <div class="event-item">
+            <p class="date-label">
+              <span class="month">FEB</span>
+              <span class="date-number">18</span>
+            </p>
+            <div class="details">
+              <h2 class="title">Jashan-e-AbuTalib</h2>
+              <p class="time"><i class="fa fa-clock-o"></i>8:00pm - 10:00pm</p>
+              <p class="location"><i class="fa fa-map-marker"></i>Imambargah Jafaria</p>
+            </div><!--//details-->
+          </div><!--event-item-->
+          <div class="event-item">
+            <p class="date-label">
+              <span class="month">SEP</span>
+              <span class="date-number">06</span>
+            </p>
+            <div class="details">
+              <h2 class="title">Robotics Workshop(Open for all)</h2>
+              <p class="time"><i class="fa fa-clock-o"></i>10:00am - 16:00pm</p>
+              <p class="location"><i class="fa fa-map-marker"></i>IIT Bombay</p>
+            </div><!--//details-->
+            <a class="read-more" href="events.html">All events<i class="fa fa-chevron-right"></i></a>
+          </div>
+        </div><!--//section-content-->
+      </section><!--//events-->
+    </div><!--//col-md-3-->
+    <div class="col-md-6">
+      <section class="course-finder">
+        <h1 class="section-heading text-highlight"><span class="line">People Finder</span></h1>
+        <div class="section-content-tagSearch section-content">
+          <form id="loginform" class="form-horizontal" role="form">
+            <div style="margin-top: 25px" class="input-group">
+              @Html.ListBox("Tags", new MultiSelectList(ViewBag.TagList, "Id", "TagName"),
+                  new
+                  {
+                    @class = "form-control input-group select tag-search-select"
+                  })
+              <div style="margin-left: 60px; float: right; margin-top: 7px">
+                <button type="button" class="btn btn-theme tag-search-btn"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+            <div class="search-option" title="Congfigures the mode of seach. Intersection of profiles or union">
+              <select id="tag-search-select">
+                <option value="0">Union</option>
+                <option value="1">Intersection</option>
+              </select>
+            </div>
+          </form><!--//course-finder-form-->
+          <br>
+          <a class="read-more" href="AdvancedSearch.html">Advanced Search<i class="fa fa-chevron-right"></i></a>
+          <br>
+          <div id="search-result-box" class="col-md-12">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <div class="panel-title search-result"></div>
+                <div style="float: right; font-size: 80%; position: relative; top: -10px"></div>
+              </div>
+              <div style="padding-top: 30px" class="panel-body">
+                <div class="col-md-12">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>User Name</th>
+                          <th>Request</th>
+                          <th>Message</th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!--//section-content-->
+      </section><!--//course-finder-->
+    </div>
+    <div class="col-md-3">
+      <section class="links">
+        <h1 class="section-heading text-highlight"><span class="line">Quick Links</span></h1>
+        <div class="section-content">
+          <p><a href="#"><i class="fa fa-caret-right"></i>E-learning Portal</a></p>
+          <p><a href="#"><i class="fa fa-caret-right"></i>Gallery</a></p>
+          <p><a href="#"><i class="fa fa-caret-right"></i>Job Vacancies</a></p>
+          <p><a href="#"><i class="fa fa-caret-right"></i>Contact</a></p>
+        </div><!--//section-content-->
+      </section><!--//links-->
+      <section class="testimonials">
+        <h1 class="section-heading text-highlight"><span class="line"> Testimonials</span></h1>
+        <div class="carousel-controls">
+          <a class="prev" href="#testimonials-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+          <a class="next" href="#testimonials-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+        </div><!--//carousel-controls-->
+        <div class="section-content">
+          <div id="testimonials-carousel" class="testimonials-carousel carousel slide">
+            <div class="carousel-inner">
+              <div class="item active">
+                <blockquote class="quote">
+                  <p><i class="fa fa-quote-left"></i>Some quotes/remarks by shia scholars/accompalished people.</p>
+                </blockquote>
+                <div class="row">
+                  <p class="people col-md-8 col-sm-3 col-xs-8"><span class="name">Syed Naqui Ali Abidi</span><br /><span class="title">Sorry, I didn't have your pic :P</span></p>
+                  <img class="profile col-md-4 pull-right" src="~/Content/Template/images/testimonials/profile-1.png" alt="" />
+                </div>
+              </div><!--//item-->
+              <div class="item">
+                <blockquote class="quote">
+                  <p>
+                    <i class="fa fa-quote-left"></i>
+                    Same goes here. The quotes will be dynamic, maybe 4 per day and will keep changing.
+                  </p>
+                </blockquote>
+                <div class="row">
+                  <p class="people col-md-8 col-sm-3 col-xs-8"><span class="name">Qasim Bhai</span><br /><span class="title">Didn't have your photo either.</span></p>
+                  <img class="profile col-md-4 pull-right" src="~/Content/Template/images/testimonials/profile-2.png" alt="" />
+                </div>
+              </div><!--//item-->
+              <div class="item">
+                <blockquote class="quote">
+                  <p>
+                    <i class="fa fa-quote-left"></i>
+                    Same goes here.
+                  </p>
+                </blockquote>
+                <div class="row">
+                  <p class="people col-md-8 col-sm-3 col-xs-8"><span class="name">Baquer Bhai</span><br /><span class="title"> Bhai aapko hi theek karna hai ye sab.</span></p>
+                  <img class="profile col-md-4 pull-right" src="~/Content/Template/images/testimonials/profile-3.png" alt="" />
+                </div>
+              </div><!--//item-->
+
+            </div><!--//carousel-inner-->
+          </div><!--//testimonials-carousel-->
+        </div><!--//section-content-->
+      </section><!--//testimonials-->
+    </div><!--//col-md-3-->
+  </div><!--//cols-wrapper-->
+  <section class="awards">
+    <div id="awards-carousel" class="awards-carousel carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <ul class="logos">
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <a href="#"><img class="img-responsive" src="~/Content/Template/images/awards/award1.jpg" alt="" /></a>
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <a href="#"><img class="img-responsive" src="~/Content/Template/images/awards/award2.jpg" alt="" /></a>
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <a href="#"><img class="img-responsive" src="~/Content/Template/images/awards/award3.jpg" alt="" /></a>
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <a href="#"><img class="img-responsive" src="~/Content/Template/images/awards/award4.jpg" alt="" /></a>
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <a href="#"><img class="img-responsive" src="~/Content/Template/images/awards/award5.jpg" alt="" /></a>
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <a href="#"><img class="img-responsive" src="~/Content/Template/images/awards/award6.jpg" alt="" /></a>
+            </li>
+          </ul><!--//slides-->
+        </div><!--//item-->
+
+        <div class="item">
+          <ul class="logos">
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <img class="img-responsive" src="~/Content/Template/images/awards/award7.jpg" alt="" />
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <img class="img-responsive" src="~/Content/Template/images/awards/award6.jpg" alt="" />
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <img class="img-responsive" src="~/Content/Template/images/awards/award5.jpg" alt="" />
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <img class="img-responsive" src="~/Content/Template/images/awards/award4.jpg" alt="" />
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <img class="img-responsive" src="~/Content/Template/images/awards/award3.jpg" alt="" />
+            </li>
+            <li class="col-md-2 col-sm-2 col-xs-4">
+              <img class="img-responsive" src="~/Content/Template/images/awards/award2.jpg" alt="" />
+            </li>
+          </ul><!--//slides-->
+        </div><!--//item-->
+      </div><!--//carousel-inner-->
+      <a class="left carousel-control" href="#awards-carousel" data-slide="prev">
+        <i class="fa fa-angle-left"></i>
+      </a>
+      <a class="right carousel-control" href="#awards-carousel" data-slide="next">
+        <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  </section>
+</div><!--//content-->
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+  @Scripts.Render("~/Scripts/chosen.jquery.min.js")
+  <script>
+
+    $(".select").chosen();
+    $(function () {
+      var originalColor = $("#search-result-box .panel-title").css("color");
+      $(".tag-search-btn").click(function () {
+        var selected = $('.select').chosen().val();
+        selected.push($(".search-option #tag-search-select").val());
+        $.ajax({
+          url: '@(Url.Action("TagSearch", "Home"))',
+          type: 'post',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify(selected),
+          success: function (jsonStr) {
+            var json = JSON.parse(jsonStr);
+            var jsonLength = json.length;
+            $("#search-result-box").show();
+            $("#search-result-box .panel-title").css("color", originalColor);
+            if (jsonLength <= 0) {
+              $("#search-result-box .panel-title").css("color", "red");
+              $("#search-result-box .panel-body").hide();
+            } else {
+              $("#search-result-box .panel-body").show();
+              searchResults(json);
+            }
+            $('#search-result-box .panel-title').text(jsonLength + " profile" + (jsonLength <= 1 ? "" : "s") + " found.");
+            console.log(json);
+          }
+        });
+      });
+    });
+
+    function searchResults(json) {
+      var rows = new Array(), j = -1;
+      for (var key = 0, size = json.length; key < size; key++) {
+        rows[++j] = '<tr><td>';
+        rows[++j] = json[key].UserName;
+        rows[++j] = '</td><td>';
+        var jsonStr = json[key].ProfileId;
+        var reqSpanStr = json[key].RequestSentToThisUserByCurrentUser ? "<span class=\"label label-success\"><i class=\"fa fa-check-circle\"> Request Sent</i></span>" : "<span><p><span class=\"label label-primary \"> <a class='colorless-link'>Send Request</a></span></p></span>";
+        var reqIdStr = json[key].RequestSentToThisUserByCurrentUser ? "" : jsonStr;
+        var reqElementId = 'tag-SendRequest-' + (j + 1);
+        rows[++j] = "<div id=\"" + reqElementId + "\" onclick=\"processRequestSending(" + reqIdStr + ",\'" + reqElementId + "\')\">" + reqSpanStr + "</div>";
+        rows[++j] = '</td><td>';
+        var msgSpanStr = json[key].MessageSentToThisUserByCurrentUser ? "<span class=\"label label-success\"><i class=\"fa fa-check-circle\"> Message Sent</i></span>" : "<span><p><span class=\"label label-primary \"> <a class='colorless-link'>Send Message</a></span></p></span>";
+        var msgIdStr = json[key].MessageSentToThisUserByCurrentUser ? "" : jsonStr;
+        var msgElementId = 'tag-SendMessage-' + (j + 1);
+        rows[++j] = "<div id=\"" + msgElementId + "\" onclick=\"processMessageSending(" + msgIdStr + ",\'" + msgElementId + "\')\">" + msgSpanStr + "</div>";
+        rows[++j] = '</td></tr>';
+      }
+      $('#search-result-box .table-body').html(rows.join(''));
+    }
+
+    function processRequestSending(id, elementId) {
+      if (id != "") {
+        $.ajax({
+          url: '@(Url.Action("SendRequest", "Generic"))/' + id,
+          type: 'post',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          success: function (jsonStr) {
+            var json = JSON.parse(jsonStr);
+            if (json.success) {
+              $('#' + elementId).html("<span class=\"label label-success\"><i class=\"fa fa-check-circle\"> Request Sent</i></span>");
+              $('#' + elementId).attr("onclick", '')
+            }
+          }
+        });
+      }
+    }
+
+    function processMessageSending(id, elementId) {
+      if (id != "") {
+        $.ajax({
+          url: '@(Url.Action("SendMessage", "Generic"))/' + id,
+          type: 'post',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          success: function (jsonStr) {
+            var json = JSON.parse(jsonStr);
+            if (json.success) {
+              $('#' + elementId).html("<span class=\"label label-success\"><i class=\"fa fa-check-circle\"> Message Sent</i></span>");
+              $('#' + elementId).attr("onclick", '')
+            }
+          }
+        });
+      }
+    }
+
+  </script>
+}
+@section Styles {
+  @Styles.Render("~/Content/chosen.min.css")
+  @Styles.Render("~/Content/site.min.css")
+  @Styles.Render("~/Content/sitealternate.min.css")
+}

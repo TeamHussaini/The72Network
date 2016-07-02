@@ -1,0 +1,39 @@
+﻿@using The72Network.Web.Controllers.ViewModels
+@model IEnumerable<CompleteUserProfileViewModel>
+@{
+
+  ViewBag.Title = "Connections";
+}
+
+<div class="content container">
+  <div class="page-wrapper">
+    <header class="page-heading clearfix">
+      <h1 class="heading-title pull-left">Your Connections</h1>
+    </header>
+    <div class="page-content">
+      <div class="row page-row">
+        <div class="team-wrapper col-md-8 col-sm-7">
+          @foreach (var user in Model)
+          {
+            <div class="row page-row">
+              <figure class="thumb col-md-3 col-sm-4 col-xs-6">
+                <img class="img-responsive" src="~/Images/ProfilePic/@user.ImageUrl" alt="" />
+              </figure>
+              <div class="details col-md-9 col-sm-8 col-xs-6">
+                <h3 class="title">@user.UserName</h3>
+                <h4>@user.Profession</h4>
+                <p>@user.Description</p>
+                <p>
+                  @foreach (var tag in user.Tags)
+                  {
+                    <span class="label label-theme">@tag</span>
+                  }
+                </p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

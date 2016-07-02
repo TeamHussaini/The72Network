@@ -1,0 +1,116 @@
+﻿@using The72Network.Web.Controllers.ViewModels;
+@model  IList<The72Network.Web.Controllers.ViewModels.RequestPageViewModel>
+
+<div class="container">
+  <div class="page-wrapper">
+    <header class="page-heading clearfix">
+      <h1 class="heading-title pull-left">Pending Requests</h1>
+    </header>
+    <div class="table-responsive mainbox col-md-12 col-sm-16">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>UserName</th>
+            <th>Tags</th>
+            <th>Profession</th>
+            <th>Request Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @{
+            int j = 0;
+            foreach (var reqModel in Model)
+            {
+              <tr>
+                <td>@reqModel.UserName</td>
+                <td>
+                  @for (int i = 0; i < reqModel.Tags.Count(); i++)
+                  {
+                    @reqModel.Tags[i]
+                    if (i < @reqModel.Tags.Count() - 1)
+                    {
+                      <i>, </i>
+                    }
+                  }
+                </td>
+                <td>@reqModel.Profession</td>
+                <td>
+                  <div id="request-processing-@j">
+                    <span class="label label-success" onclick="processAcceptedRequest(@reqModel.RequestId, 'request-processing-@j')"><a class='colorless-link'>Accept</a></span>
+                    <span class="label label-warning" onclick="processDeferredRequest(@reqModel.RequestId, 'request-processing-@j')"><a class='colorless-link'>Defer</a></span>
+                    <span class="label label-danger" onclick="processDeclinedRequest(@reqModel.RequestId, 'request-processing-@j')"><a class='colorless-link'>Decline</a></span>
+                  </div>
+                </td>
+              </tr>
+                  j++;
+            }
+          }
+        </tbody>
+      </table><!--//table-->
+    </div><!--//table-responsive-->
+  </div>
+</div>
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+  <script>
+    function processAcceptedRequest(reqId, elementId) {
+      $.ajax({
+        url: '@(Url.Action("ProcessRequest", "Generic"))',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+          RequestId: reqId,
+          State: 'Accepted'
+        }),
+        success: function (jsonStr) {
+          var json = JSON.parse(jsonStr);
+          if (json.success) {
+            $('#' + elementId).html("<span class=\"label label-success\">Accepted</span>");
+          }
+        }
+      });
+    }
+
+    function processDeferredRequest(reqId, elementId) {
+      $.ajax({
+        url: '@(Url.Action("ProcessRequest", "Generic"))',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+          RequestId: reqId,
+          State: 'Pending'
+        }),
+        success: function (jsonStr) {
+          var json = JSON.parse(jsonStr);
+          if (json.success) {
+            $('#' + elementId).html("<span class=\"label label-warning\">Deferred</span>");
+          }
+        }
+      });
+    }
+
+    function processDeclinedRequest(reqId, elementId) {
+      $.ajax({
+        url: '@(Url.Action("ProcessRequest", "Generic"))',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+          RequestId: reqId,
+          State: 'Declined'
+        }),
+        success: function (jsonStr) {
+          var json = JSON.parse(jsonStr);
+          if (json.success) {
+            $('#' + elementId).html("<span class=\"label label-danger\">Declined</span>");
+          }
+        }
+      });
+    }
+  </script>
+}
+@section Styles {
+  @Styles.Render("~/Content/site.min.css")
+}
