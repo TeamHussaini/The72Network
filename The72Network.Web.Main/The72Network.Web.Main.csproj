@@ -16,7 +16,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44301</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -231,11 +231,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GenericController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\GenericViewModels.cs" />
+    <Compile Include="ViewModels\SocialViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\chosen-sprite%402x.png" />
@@ -643,10 +649,6 @@
     <Folder Include="Images\ProfilePic\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\The72Network.Web.Controllers\The72Network.Web.Controllers.csproj">
-      <Project>{e189a52a-21d5-4c0a-b81a-0978e38a95cf}</Project>
-      <Name>The72Network.Web.Controllers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\The72Network.Web.Shared\The72Network.Web.Shared.csproj">
       <Project>{a2a83d1b-c3a4-445a-9d50-2ac8197e6458}</Project>
       <Name>The72Network.Web.Shared</Name>
@@ -674,7 +676,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4610</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3196/</IISUrl>
+          <IISUrl>https://localhost:44301/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

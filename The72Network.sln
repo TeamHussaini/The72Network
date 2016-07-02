@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_72NetworkBootstraped", "72
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The72Network.Web.StorageAccess", "The72Network.Web.StorageAccess\The72Network.Web.StorageAccess.csproj", "{C764EBAB-C0D6-44F5-BC76-54B4320D9F77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The72Network.Web.Controllers", "The72Network.Web.Controllers\The72Network.Web.Controllers.csproj", "{E189A52A-21D5-4C0A-B81A-0978E38A95CF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The72Network.Web.Shared", "The72Network.Web.Shared\The72Network.Web.Shared.csproj", "{A2A83D1B-C3A4-445A-9D50-2AC8197E6458}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The72Network.Web.Main", "The72Network.Web.Main\The72Network.Web.Main.csproj", "{31E68CC6-E40D-4CE8-AB8D-BF0D8C4BFFC4}"
@@ -27,10 +25,6 @@ Global
 		{C764EBAB-C0D6-44F5-BC76-54B4320D9F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C764EBAB-C0D6-44F5-BC76-54B4320D9F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C764EBAB-C0D6-44F5-BC76-54B4320D9F77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E189A52A-21D5-4C0A-B81A-0978E38A95CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E189A52A-21D5-4C0A-B81A-0978E38A95CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E189A52A-21D5-4C0A-B81A-0978E38A95CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E189A52A-21D5-4C0A-B81A-0978E38A95CF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2A83D1B-C3A4-445A-9D50-2AC8197E6458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2A83D1B-C3A4-445A-9D50-2AC8197E6458}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2A83D1B-C3A4-445A-9D50-2AC8197E6458}.Release|Any CPU.ActiveCfg = Release|Any CPU

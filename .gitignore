@@ -3,6 +3,8 @@ The72Network/
 72NetworkBootstraped/App_Data/
 72NetworkBootstraped/obj/
 72NetworkBootstraped/bin/
+The72Network.Web.*/bin/
+The72Network.Web.*/obj/
 72NetworkBootstraped/Properties/PublishProfiles/
 the72network_com_certs/
 packages/

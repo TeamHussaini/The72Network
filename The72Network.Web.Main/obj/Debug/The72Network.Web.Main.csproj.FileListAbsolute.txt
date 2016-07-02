@@ -22,13 +22,11 @@ C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\S
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\System.Web.Mvc.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\System.Web.Optimization.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\System.Web.WebPages.Deployment.dll
-C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\The72Network.Web.Controllers.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\The72Network.Web.Shared.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\The72Network.Web.StorageAccess.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\WebGrease.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\Org.Mentalis.Security.Cryptography.dll
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\Mono.Math.dll
-C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\The72Network.Web.Controllers.pdb
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\The72Network.Web.Shared.pdb
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\The72Network.Web.StorageAccess.pdb
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\EntityFramework.xml

@@ -1,4 +1,4 @@
-﻿@model The72Network.Web.Controllers.ViewModels.NavbarViewModel
+﻿@model The72Network.Web.Main.ViewModels.NavbarViewModel
 
 <nav class="main-nav" role="navigation">
   <div class="container">
@@ -14,14 +14,14 @@
       @if (Request.IsAuthenticated)
       {
         <ul class="nav navbar-nav">
-            @if (Session["ActiveNavbar"] != null)
-            {
-          <li class= "nav-item + @(((string)Session["ActiveNavbar"]).Equals("Home") ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
-            }
-            else
-            {
-         <li class="nav-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
-            }
+          @if (Session["ActiveNavbar"] != null)
+          {
+            <li class="nav-item + @(((string)Session["ActiveNavbar"]).Equals("Home") ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
+          }
+          else
+          {
+            <li class="nav-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+          }
           <li class="nav-item dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">News <i class="fa fa-angle-down"></i></a>
             <ul class="dropdown-menu">
@@ -46,52 +46,52 @@
           </li><!--//dropdown-->
           <li class="nav-item"><a href="contact.html">Contact</a></li>
         </ul><!--//nav-->
-  <ul class="nav navbar-nav" style="float: right">
-    <li class="nav-item">
-      <a id="nav-request" href="@(Url.Action("GetRequests", "Generic"))">Requests<span class="badge badge-info">@Model.NumberOfRequests</span></a>
-    </li>
-    <li class="nav-item">
-      <a id="nav-message" href="@(Url.Action("GetMessages", "Generic"))">Inbox <span class="badge badge-success">@Model.NumberOfMessages</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
-        <i class="glyphicon glyphicon-user"></i>
-        @User.Identity.Name.ToString()
-      </a>
-      <ul class="dropdown-menu" style="min-width:100px">
-        <li>
-          @Html.ActionLink("Profile", "UserExtendedProfile", "Account", null, new
+        <ul class="nav navbar-nav" style="float: right">
+          <li class="nav-item">
+            <a id="nav-request" href="@(Url.Action("GetRequests", "Generic"))">Requests<span class="badge badge-info">@Model.NumberOfRequests</span></a>
+          </li>
+          <li class="nav-item">
+            <a id="nav-message" href="@(Url.Action("GetMessages", "Generic"))">Inbox <span class="badge badge-success">@Model.NumberOfMessages</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
+              <i class="glyphicon glyphicon-user"></i>
+              @User.Identity.Name.ToString()
+            </a>
+            <ul class="dropdown-menu" style="min-width:100px">
+              <li>
+                @Html.ActionLink("Profile", "UserExtendedProfile", "Account", null, new
      {
        @class = "btn btn-primary"
      })
-        </li>
-        <li>
-          @Html.ActionLink("Connections", "Connections", "Generic", null, new
+              </li>
+              <li>
+                @Html.ActionLink("Connections", "Connections", "Generic", null, new
      {
        @class = "btn btn-primary"
      })
-        </li>
-        <li>
-          @Html.ActionLink("SignOut", "SignOut", "Account", null, new
+              </li>
+              <li>
+                @Html.ActionLink("SignOut", "SignOut", "Account", null, new
      {
        @class = "btn btn-primary"
      })
-        </li>
-      </ul>
-    </li>
-  </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
       }
       else
       {
         <ul class="nav navbar-nav">
-            @if (Session["ActiveNavbar"] != null)
-            { 
-          <li class="nav-item + @(((string)Session["ActiveNavbar"]).Equals("Home") ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
-            }
-            else
-            {
-          <li class="nav-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
-            }
+          @if (Session["ActiveNavbar"] != null)
+          {
+            <li class="nav-item + @(((string)Session["ActiveNavbar"]).Equals("Home") ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
+          }
+          else
+          {
+            <li class="nav-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+          }
           <li class="nav-item"><a href="contact.html">Contact</a></li>
         </ul><!--//nav-->
       }
