@@ -18,12 +18,23 @@ using The72Network.Web.StorageAccess.Helpers;
 using The72Newtork.Web.Shared.Utilities;
 using WebMatrix.WebData;
 using The72Network.Web.Main.ViewModels;
+using The72Network.Web.Services.Account;
 
 namespace The72Network.Web.Main.Controllers
 {
   [Authorize]
   public class AccountController : Controller
   {
+    public AccountController()
+    {
+      _accountService = new AccountService();
+    }
+
+    public AccountController(IAccountService accountService)
+    {
+      _accountService = accountService;
+    }
+
     //
     // GET: /Account/SignIn
 
@@ -78,7 +89,7 @@ namespace The72Network.Web.Main.Controllers
     [AllowAnonymous]
     public ActionResult SignUp()
     {
-      ViewBag.Countries = new SelectList(Util.ListOfCountries());
+      ViewBag.Countries = new SelectList(_accountService.GetCountries());
       return View();
     }
 
@@ -103,19 +114,7 @@ namespace The72Network.Web.Main.Controllers
         // Attempt to register the user
         try
         {
-          using (CommonDbContext dbContext = new CommonDbContext())
-          {
-            UserProfile user = new UserProfile
-            {
-              UserName = model.UserName,
-              Country = model.Country,
-              EmailId = model.EmailId,
-              MobilePhone = model.MobilePhone
-            };
-
-            dbContext.UserProfiles.Add(user);
-            dbContext.SaveChanges();
-          }
+          _accountService.AddUser(model.UserName, model.Country, model.EmailId, model.MobilePhone);
 
           WebSecurity.CreateAccount(model.UserName, model.Password);
           WebSecurity.Login(model.UserName, model.Password);
@@ -128,7 +127,8 @@ namespace The72Network.Web.Main.Controllers
           ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
         }
       }
-      ViewBag.Countries = new SelectList(Util.ListOfCountries());
+
+      ViewBag.Countries = _accountService.GetCountries();
       // If we got this far, something failed, redisplay form
       return View(model);
     }
@@ -136,19 +136,13 @@ namespace The72Network.Web.Main.Controllers
     [AllowAnonymous]
     public JsonResult IsUserUnique(string UserName)
     {
-      using (CommonDbContext dbContext = new CommonDbContext())
-      {
-        return Json(!dbContext.UserProfiles.Any(x => x.UserName == UserName), JsonRequestBehavior.AllowGet);
-      }
+      return Json(_accountService.IsUserUnique(UserName), JsonRequestBehavior.AllowGet);
     }
 
     [AllowAnonymous]
     public JsonResult IsEmailUnique(string emailId)
     {
-      using (CommonDbContext dbContext = new CommonDbContext())
-      {
-        return Json(!dbContext.UserProfiles.Any(x => x.EmailId == emailId), JsonRequestBehavior.AllowGet);
-      }
+      return Json(_accountService.IsEmailUnique(emailId), JsonRequestBehavior.AllowGet);
     }
 
     //
@@ -156,11 +150,9 @@ namespace The72Network.Web.Main.Controllers
 
     public ActionResult UserExtendedProfile()
     {
-      using (CommonDbContext dbContext = new CommonDbContext())
-      {
-        UserProfile user = dbContext.UserProfiles.FirstOrDefault(p => p.UserName == User.Identity.Name);
-        ViewBag.TagList = DbHelper.TagList;
-        ViewBag.ProfessionList = new SelectList(Util.ListOfProfessions);
+        UserProfile user = _accountService.GetUserProfile(User.Identity.Name);
+        ViewBag.TagList = _accountService.GetTags();
+        ViewBag.ProfessionList = new SelectList(_accountService.GetProfessionsList());
         if (user == null || user.UserExtendedProfile == null)
         {
           return View();
@@ -185,7 +177,6 @@ namespace The72Network.Web.Main.Controllers
 
         return View(model);
       }
-    }
 
     //
     // POST: /Account/UserExtendedProfile
@@ -656,6 +647,12 @@ namespace The72Network.Web.Main.Controllers
           return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
       }
     }
+    #endregion
+
+    #region Privates
+
+    private IAccountService _accountService;
+
     #endregion
   }
 }

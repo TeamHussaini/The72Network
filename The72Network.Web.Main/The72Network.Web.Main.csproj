@@ -649,6 +649,10 @@
     <Folder Include="Images\ProfilePic\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\The72Network.Web.Services\The72Network.Web.Services.csproj">
+      <Project>{1fe1e319-6a03-4dbf-8881-cb8d8074dadd}</Project>
+      <Name>The72Network.Web.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\The72Network.Web.Shared\The72Network.Web.Shared.csproj">
       <Project>{a2a83d1b-c3a4-445a-9d50-2ac8197e6458}</Project>
       <Name>The72Network.Web.Shared</Name>
