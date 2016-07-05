@@ -116,3 +116,5 @@ C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\S
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\EntityFramework.SqlServer.xml
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\System.Web.Helpers.xml
 C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\System.Web.Razor.xml
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\The72Network.Web.Services.dll
+C:\Users\wali007hamza\Documents\Project\The72Network\The72Network.Web.Main\bin\The72Network.Web.Services.pdb

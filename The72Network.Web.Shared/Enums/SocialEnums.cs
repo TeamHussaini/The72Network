@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace The72Network.Web.Shared.Enums
-  {
+{
   public enum RequestState
   {
     Pending = 0,
@@ -30,4 +30,11 @@ namespace The72Network.Web.Shared.Enums
 
     Message = 2,
   }
+
+  public enum TagSearchConfiguration
+  {
+    Union = 0,
+
+    Intersection = 1,
   }
+}

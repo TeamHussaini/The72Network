@@ -150,33 +150,33 @@ namespace The72Network.Web.Main.Controllers
 
     public ActionResult UserExtendedProfile()
     {
-        UserProfile user = _accountService.GetUserProfile(User.Identity.Name);
-        ViewBag.TagList = _accountService.GetTags();
-        ViewBag.ProfessionList = new SelectList(_accountService.GetProfessionsList());
-        if (user == null || user.UserExtendedProfile == null)
-        {
-          return View();
-        }
-
-        UserExtendedProfileModel model = new UserExtendedProfileModel
-        {
-          AlmaMater = user.UserExtendedProfile.AlmaMater,
-          City = user.UserExtendedProfile.City,
-          DOB = user.UserExtendedProfile.DOB,
-          Profession = user.UserExtendedProfile.Profession,
-          Qualifications = user.UserExtendedProfile.Qualifications,
-          ImageUrl = user.UserExtendedProfile.ImageUrl,
-          Description = user.UserExtendedProfile.Description
-        };
-
-        model.Tags = new List<int>();
-        foreach (Tag tag in user.UserExtendedProfile.Tags)
-        {
-          model.Tags.Add(tag.Id);
-        }
-
-        return View(model);
+      UserProfile user = _accountService.GetUserProfile(User.Identity.Name);
+      ViewBag.TagList = _accountService.GetTags();
+      ViewBag.ProfessionList = new SelectList(_accountService.GetProfessionsList());
+      if (user == null || user.UserExtendedProfile == null)
+      {
+        return View();
       }
+
+      UserExtendedProfileModel model = new UserExtendedProfileModel
+      {
+        AlmaMater = user.UserExtendedProfile.AlmaMater,
+        City = user.UserExtendedProfile.City,
+        DOB = user.UserExtendedProfile.DOB,
+        Profession = user.UserExtendedProfile.Profession,
+        Qualifications = user.UserExtendedProfile.Qualifications,
+        ImageUrl = user.UserExtendedProfile.ImageUrl,
+        Description = user.UserExtendedProfile.Description
+      };
+
+      model.Tags = new List<int>();
+      foreach (Tag tag in user.UserExtendedProfile.Tags)
+      {
+        model.Tags.Add(tag.Id);
+      }
+
+      return View(model);
+    }
 
     //
     // POST: /Account/UserExtendedProfile
@@ -190,65 +190,8 @@ namespace The72Network.Web.Main.Controllers
         // Extend the user's profile
         try
         {
-          using (CommonDbContext dbContext = new CommonDbContext())
-          {
-            UserProfile user = dbContext.UserProfiles.FirstOrDefault(p => p.UserName == User.Identity.Name);
-            Dictionary<int, Tag> tagMap = dbContext.Tag.ToDictionary(x => x.Id, x => x);
-
-            if (user == null)
-            {
-              // Log
-              throw new Exception("User not found");
-            }
-            UserExtendedProfile profile = new UserExtendedProfile
-            {
-              Id = user.Id,
-              UserProfile = user,
-              AlmaMater = model.AlmaMater,
-              City = model.City,
-              DOB = model.DOB,
-              Profession = model.Profession,
-              Qualifications = model.Qualifications,
-              Description = model.Description,
-              ImageUrl = string.Empty,
-              Tags = new List<Tag>()
-            };
-
-            foreach (int tagId in model.Tags)
-            {
-              Tag selectedTag = tagMap[tagId];
-              profile.Tags.Add(selectedTag);
-              selectedTag.Users.Add(profile);
-            }
-
-            if (user.UserExtendedProfile != null)
-            {
-              foreach (Tag tag in user.UserExtendedProfile.Tags)
-              {
-                // This updates the tag
-              }
-              profile.ImageUrl = user.UserExtendedProfile.ImageUrl;
-              profile.Update(dbContext);
-            }
-            else
-            {
-              dbContext.UserExtendedProfile.Add(profile);
-            }
-
-            UserProfile userProfile = new UserProfile
-            {
-              Id = user.Id,
-              EmailId = user.EmailId,
-              MobilePhone = user.MobilePhone,
-              Country = user.Country,
-              UserName = user.UserName,
-              UserExtendedProfile = profile
-            };
-
-            userProfile.Update(dbContext);
-
-            dbContext.SaveChanges();
-          }
+          _accountService.AddUserExtendedProfile(User.Identity.Name, model.AlmaMater, model.City, model.DOB,
+            model.Profession, model.Qualifications, model.Description, model.Tags);
 
           return RedirectToAction("Index", "Home");
         }
@@ -258,8 +201,8 @@ namespace The72Network.Web.Main.Controllers
           ModelState.AddModelError("", e.StackTrace);
         }
       }
-      ViewBag.TagList = DbHelper.TagList;
-      ViewBag.ProfessionList = new SelectList(Util.ListOfProfessions);
+      ViewBag.TagList = _accountService.GetTags();
+      ViewBag.ProfessionList = new SelectList(_accountService.GetProfessionsList());
       // If we got this far, something failed, redisplay form
       return View(model);
     }
@@ -273,66 +216,23 @@ namespace The72Network.Web.Main.Controllers
     {
       if (file != null)
       {
-        using (CommonDbContext dbContext = new CommonDbContext())
+        string imageName = Path.GetFileName(file.FileName);
+        if (imageName == null)
         {
-          try
-          {
-            string imageName = Path.GetFileName(file.FileName);
-            if (imageName == null)
-            {
-              return RedirectToAction("UserExtendedProfile", "Account");
-            }
-
-            // TODO : Image name needs to be hashed.
-            string imageExtension = imageName.Substring(imageName.IndexOf('.'));
-            imageName = imageName.Substring(0, imageName.IndexOf('.')) + "_" + User.Identity.Name + imageExtension;
-
-            string physicalPath = Server.MapPath("~/Images/ProfilePic");
-            physicalPath = Path.Combine(physicalPath, imageName);
-
-            // Saves the image to file system.
-            file.SaveAs(physicalPath);
-
-            UserProfile user = dbContext.UserProfiles.FirstOrDefault(p => p.UserName == User.Identity.Name);
-
-            if (user == null)
-            {
-              throw new Exception("User not found.");
-            }
-
-            UserExtendedProfile profile = new UserExtendedProfile
-            {
-              Id = user.Id,
-              UserProfile = user,
-              ImageUrl = imageName
-            };
-
-            if (user.UserExtendedProfile != null)
-            {
-              profile.UserProfile = user;
-              profile.Id = user.UserExtendedProfile.Id;
-              profile.AlmaMater = user.UserExtendedProfile.AlmaMater;
-              profile.City = user.UserExtendedProfile.City;
-              profile.DOB = user.UserExtendedProfile.DOB;
-              profile.Profession = user.UserExtendedProfile.Profession;
-              profile.Qualifications = user.UserExtendedProfile.Qualifications;
-              profile.ImageUrl = imageName;
-
-              profile.Update(dbContext);
-            }
-            else
-            {
-              dbContext.UserExtendedProfile.Add(profile);
-            }
-
-            dbContext.SaveChanges();
-          }
-          // TODO : Exception printing stacktrace needs to be removed.
-          catch (Exception e)
-          {
-            ModelState.AddModelError("", e.StackTrace);
-          }
+          return RedirectToAction("UserExtendedProfile", "Account");
         }
+
+        //// TODO : Image name needs to be hashed.
+        //string imageExtension = imageName.Substring(imageName.IndexOf('.'));
+        //imageName = imageName.Substring(0, imageName.IndexOf('.')) + "_" + User.Identity.Name + imageExtension;
+
+        //string physicalPath = Server.MapPath("~/Images/ProfilePic");
+        //physicalPath = Path.Combine(physicalPath, imageName);
+
+        //// Saves the image to file system.
+        //file.SaveAs(physicalPath);
+
+        _accountService.TryUploadImage(User.Identity.Name, file);
       }
 
       return RedirectToAction("UserExtendedProfile", "Account");
@@ -352,7 +252,10 @@ namespace The72Network.Web.Main.Controllers
       if (ownerAccount == User.Identity.Name)
       {
         // Use a transaction to prevent the user from deleting their last login credential
-        using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+        using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions
+        {
+          IsolationLevel = IsolationLevel.Serializable
+        }))
         {
           bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
           if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
@@ -364,7 +267,10 @@ namespace The72Network.Web.Main.Controllers
         }
       }
 
-      return RedirectToAction("Manage", new { Message = message });
+      return RedirectToAction("Manage", new
+      {
+        Message = message
+      });
     }
 
     //
@@ -409,7 +315,10 @@ namespace The72Network.Web.Main.Controllers
 
           if (changePasswordSucceeded)
           {
-            return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+            return RedirectToAction("Manage", new
+            {
+              Message = ManageMessageId.ChangePasswordSuccess
+            });
           }
           else
           {
@@ -432,7 +341,10 @@ namespace The72Network.Web.Main.Controllers
           try
           {
             WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-            return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+            return RedirectToAction("Manage", new
+            {
+              Message = ManageMessageId.SetPasswordSuccess
+            });
           }
           catch (Exception)
           {
@@ -453,7 +365,10 @@ namespace The72Network.Web.Main.Controllers
     [ValidateAntiForgeryToken]
     public ActionResult ExternalLogin(string provider, string returnUrl)
     {
-      return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+      return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new
+      {
+        ReturnUrl = returnUrl
+      }));
     }
 
     //
@@ -462,7 +377,10 @@ namespace The72Network.Web.Main.Controllers
     [AllowAnonymous]
     public ActionResult ExternalLoginCallback(string returnUrl)
     {
-      AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+      AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new
+      {
+        ReturnUrl = returnUrl
+      }));
       if (!result.IsSuccessful)
       {
         return RedirectToAction("ExternalLoginFailure");
@@ -485,7 +403,11 @@ namespace The72Network.Web.Main.Controllers
         string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
         ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
         ViewBag.ReturnUrl = returnUrl;
-        return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+        return View("ExternalLoginConfirmation", new RegisterExternalLoginModel
+        {
+          UserName = result.UserName,
+          ExternalLoginData = loginData
+        });
       }
     }
 
@@ -515,7 +437,10 @@ namespace The72Network.Web.Main.Controllers
           if (user == null)
           {
             // Insert name into the profile table
-            db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+            db.UserProfiles.Add(new UserProfile
+            {
+              UserName = model.UserName
+            });
             db.SaveChanges();
 
             OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
@@ -601,8 +526,16 @@ namespace The72Network.Web.Main.Controllers
         ReturnUrl = returnUrl;
       }
 
-      public string Provider { get; private set; }
-      public string ReturnUrl { get; private set; }
+      public string Provider
+      {
+        get;
+        private set;
+      }
+      public string ReturnUrl
+      {
+        get;
+        private set;
+      }
 
       public override void ExecuteResult(ControllerContext context)
       {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using The72Network.Web.StorageAccess;
 using The72Network.Web.StorageAccess.DBModels;
 
 namespace The72Network.Web.Services.Account
@@ -22,5 +24,9 @@ namespace The72Network.Web.Services.Account
     IList<Tag> GetTags();
 
     IList<string> GetProfessionsList();
+
+    void AddUserExtendedProfile(string username, string almamater, string city, string dob, string profession, string qualifications, string description, IList<int> selectedTags);
+
+    bool TryUploadImage(string username, HttpPostedFileBase file);
   }
 }

@@ -24,7 +24,7 @@ namespace The72Network.Web.StorageAccess
       }
     }
 
-    public IRepository<UserExtendedProfile> UserExtendedProfile
+    public IRepository<UserExtendedProfile> UserExtendedProfileRepository
     {
       get
       {

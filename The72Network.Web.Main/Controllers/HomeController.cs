@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using The72Network.Web.Services.Generic;
+using The72Network.Web.Shared.Enums;
 using The72Network.Web.StorageAccess.DBModels;
 using The72Network.Web.StorageAccess.EntityFramework;
 using The72Network.Web.StorageAccess.Helpers;
@@ -14,6 +16,16 @@ namespace The72Network.Web.Main.Controllers
 {
   public class HomeController : Controller
   {
+    public HomeController()
+    {
+      _genericService = new GenericService();
+    }
+
+    public HomeController(IGenericService genericService)
+    {
+      _genericService = genericService;
+    }
+
     public ActionResult Index()
     {
       Session["ActiveNavbar"] = "Home";
@@ -33,46 +45,9 @@ namespace The72Network.Web.Main.Controllers
       {
         return null;
       }
-      using (CommonDbContext dbContext = new CommonDbContext())
-      {
-        Dictionary<int, Tag> tagMap = dbContext.Tag.ToDictionary(x => x.Id, x => x);
-        List<TagSearchResult> userList = new List<TagSearchResult>();
-        UserProfile currentUser = dbContext.UserProfiles.FirstOrDefault(x => x.UserName == User.Identity.Name);
-        IList<int> requestedUsers = dbContext.Requests.Where(r => r.From.Id == currentUser.Id).Select(x => x.To.Id).ToList();
-        Dictionary<int, int> uniqueUsers = new Dictionary<int, int>();
-        foreach (int id in tags)
-        {
-          Tag tag;
-          if (tagMap.TryGetValue(id, out tag))
-          {
-            foreach (UserExtendedProfile user in tag.Users)
-            {
-              if (!uniqueUsers.ContainsKey(user.UserProfile.Id) && currentUser.Id != user.UserProfile.Id)
-              {
-                userList.Add(new TagSearchResult(user.UserProfile.Id, user.UserProfile.UserName,
-                  user.ImageUrl, requestSent: requestedUsers.Contains(user.UserProfile.Id)));
-                uniqueUsers[user.UserProfile.Id] = 1;
-              }
-              else
-              {
-                if (uniqueUsers.ContainsKey(user.UserProfile.Id)) 
-                {
-                  uniqueUsers[user.UserProfile.Id]++;
-                }
-              }
-            }
-          }
-        }
-        // Configuration 0 : Union ; Configuration 1 : Intersection
-        if (configuration == 1)
-        {
-          // Intersection
-          return Json(new JavaScriptSerializer().Serialize(userList.Where(x => uniqueUsers[x.ProfileId] == tags.Length)));
-        }
-
-        // Union
-        return Json(new JavaScriptSerializer().Serialize(userList));
-      }
+ 
+      TagSearchConfiguration tagSearchConfig = (TagSearchConfiguration)configuration;
+      return Json(_genericService.GetUserFromTagsAsString(User.Identity.Name, tags, tagSearchConfig, tags.Length));
     }
 
     public ActionResult About()
@@ -88,5 +63,11 @@ namespace The72Network.Web.Main.Controllers
 
       return View();
     }
+
+    #region Privates
+
+    private IGenericService _genericService;
+
+    #endregion
   }
 }
