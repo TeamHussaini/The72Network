@@ -5,12 +5,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using The72Network.Web.StorageAccess.DBModels;
 using The72Network.Web.StorageAccess.EntityFramework;
 
 namespace The72Network.Web.StorageAccess.Repositories
 {
   public class Repository<TEntity> : IRepository<TEntity>, IDisposable
-    where TEntity : class
+    where TEntity : BaseEntity
   {
     public Repository(CommonDbContext dbContext)
     {
@@ -48,8 +49,27 @@ namespace The72Network.Web.StorageAccess.Repositories
 
     public void Update(TEntity entity)
     {
-      _dbSet.Attach(entity);
-      _dbContext.Entry(entity).State = EntityState.Modified;
+      if (entity == null)
+      {
+        throw new ArgumentException("Cannot add a null entity.");
+      }
+
+      var entry = _dbContext.Entry<TEntity>(entity);
+      if (entry.State == EntityState.Detached)
+      {
+        var set = _dbContext.Set<TEntity>();
+        TEntity attachedEntity = set.Local.SingleOrDefault(e => e.Id == entity.Id);  // You need to have access to key
+
+        if (attachedEntity != null)
+        {
+          var attachedEntry = _dbContext.Entry(attachedEntity);
+          attachedEntry.CurrentValues.SetValues(entity);
+        }
+        else
+        {
+          entry.State = EntityState.Modified; // This should attach entity
+        }
+      }
     }
 
     public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
@@ -58,25 +78,25 @@ namespace The72Network.Web.StorageAccess.Repositories
     {
       IQueryable<TEntity> query = _dbSet;
 
-        if (filter != null)
-        {
-            query = query.Where(filter);
-        }
+      if (filter != null)
+      {
+        query = query.Where(filter);
+      }
 
-        foreach (var includeProperty in includeProperties.Split
-            (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-        {
-            query = query.Include(includeProperty);
-        }
+      foreach (var includeProperty in includeProperties.Split
+          (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+      {
+        query = query.Include(includeProperty);
+      }
 
-        if (orderBy != null)
-        {
-            return orderBy(query).ToList();
-        }
-        else
-        {
-            return query.ToList();
-        }
+      if (orderBy != null)
+      {
+        return orderBy(query).ToList();
+      }
+      else
+      {
+        return query.ToList();
+      }
     }
 
     #endregion

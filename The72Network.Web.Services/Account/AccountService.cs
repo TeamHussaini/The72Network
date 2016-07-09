@@ -64,6 +64,8 @@ namespace The72Network.Web.Services.Account
       using (var userProfileRepository = new Repository<UserProfile>(new CommonDbContext()))
       {
         user = userProfileRepository.Get(entity => entity.UserName == username).FirstOrDefault();
+        user.UserExtendedProfile = user.UserExtendedProfile;
+        user.UserExtendedProfile.Tags = user.UserExtendedProfile.Tags;
       }
 
       return user;
@@ -95,6 +97,7 @@ namespace The72Network.Web.Services.Account
           Profession = profession,
           Qualifications = qualifications,
           Description = description,
+          Tags = new List<Tag>()
         };
 
         var tagMap = unitOfWork.TagRepository.Get(_ => true).ToDictionary(x => x.Id, x => x);
@@ -107,6 +110,11 @@ namespace The72Network.Web.Services.Account
 
         if (user.UserExtendedProfile != null)
         {
+          //foreach (Tag tag in user.UserExtendedProfile.Tags)
+          //{
+          //  // This updates the tag
+          //}
+          user.UserExtendedProfile.Tags = user.UserExtendedProfile.Tags.ToList();
           userExtendedProfile.ImageUrl = user.UserExtendedProfile.ImageUrl;
           unitOfWork.UserExtendedProfileRepository.Update(userExtendedProfile);
         }
