@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using The72Network.Web.Shared.Enums;
-using The72Network.Web.StorageAccess;
+using The72Network.Web.StorageAccess.UnitOfWork;
 using The72Network.Web.StorageAccess.DBModels;
 using The72Newtork.Web.Shared.Wrappers;
 

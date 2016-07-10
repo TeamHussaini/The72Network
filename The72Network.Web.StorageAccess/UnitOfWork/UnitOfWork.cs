@@ -7,7 +7,7 @@ using The72Network.Web.StorageAccess.DBModels;
 using The72Network.Web.StorageAccess.EntityFramework;
 using The72Network.Web.StorageAccess.Repositories;
 
-namespace The72Network.Web.StorageAccess
+namespace The72Network.Web.StorageAccess.UnitOfWork
 {
   public class UnitOfWork : IDisposable
   {
@@ -63,7 +63,7 @@ namespace The72Network.Web.StorageAccess
       }
     }
 
-    public IRepository<SocialManager> SocialManager
+    public IRepository<SocialManager> SocialManagerRepository
     {
       get
       {

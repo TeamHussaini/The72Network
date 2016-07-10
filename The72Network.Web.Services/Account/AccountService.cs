@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
-using The72Network.Web.StorageAccess;
+using The72Network.Web.StorageAccess.UnitOfWork;
 using The72Network.Web.StorageAccess.DBModels;
 using The72Network.Web.StorageAccess.EntityFramework;
 using The72Network.Web.StorageAccess.Helpers;
