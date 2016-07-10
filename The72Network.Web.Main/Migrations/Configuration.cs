@@ -1,12 +1,11 @@
-using WebMatrix.WebData;
-using System.Data.Entity.Migrations;
 using System.Collections.Generic;
-using The72Network.Web.StorageAccess.EntityFramework;
+using System.Data.Entity.Migrations;
 using The72Network.Web.StorageAccess.DBModels;
+using The72Network.Web.StorageAccess.EntityFramework;
+using WebMatrix.WebData;
 
-namespace The72Network.Web.StorageAccess.Migrations
+namespace The72Network.Web.Main.Migrations
 {
-
   internal sealed class Configuration : DbMigrationsConfiguration<CommonDbContext>
   {
     public Configuration()

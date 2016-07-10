@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201607021735072_Assembly Separation.Designer.cs">
       <DependentUpon>201607021735072_Assembly Separation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607101712404_Initial.cs" />
+    <Compile Include="Migrations\201607101712404_Initial.Designer.cs">
+      <DependentUpon>201607101712404_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -103,6 +107,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607021735072_Assembly Separation.resx">
       <DependentUpon>201607021735072_Assembly Separation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607101712404_Initial.resx">
+      <DependentUpon>201607101712404_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
