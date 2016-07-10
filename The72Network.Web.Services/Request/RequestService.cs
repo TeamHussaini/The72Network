@@ -60,7 +60,8 @@ namespace The72Network.Web.Services.Request
       {
         var user = socialUnitOfWork.UserProfileRepository.Get(e => e.UserName == username).FirstOrDefault();
         var connectedUsers =
-          socialUnitOfWork.RequestRepository.Get(e => (e.To.Id == user.Id || e.From.Id == user.Id) && e.State == RequestState.Accepted)
+          socialUnitOfWork.RequestRepository.Get(e => (e.To.Id == user.Id) && (e.State == RequestState.Accepted))
+          .Where(x => x.From != null)
           .Select(x => new ConnectedUsersDTO(
               x.From.UserExtendedProfile.AlmaMater,
               x.From.UserExtendedProfile.City,
@@ -73,7 +74,24 @@ namespace The72Network.Web.Services.Request
               x.From.UserExtendedProfile.Profession,
               x.From.UserExtendedProfile.Qualifications,
               x.From.UserExtendedProfile.Tags.Select(t => t.TagName).ToList(),
-              x.From.UserName));
+              x.From.UserName)).ToList();
+
+        connectedUsers.AddRange(
+          socialUnitOfWork.RequestRepository.Get(e => (e.From.Id == user.Id) && (e.State == RequestState.Accepted))
+          .Where(x => x.To != null)
+          .Select(x => new ConnectedUsersDTO(
+              x.To.UserExtendedProfile.AlmaMater,
+              x.To.UserExtendedProfile.City,
+              x.To.Country,
+              x.To.UserExtendedProfile.Description,
+              x.To.UserExtendedProfile.DOB,
+              x.To.EmailId,
+              x.To.UserExtendedProfile.ImageUrl,
+              x.To.MobilePhone,
+              x.To.UserExtendedProfile.Profession,
+              x.To.UserExtendedProfile.Qualifications,
+              x.To.UserExtendedProfile.Tags.Select(t => t.TagName).ToList(),
+              x.To.UserName)).ToList());
 
         return connectedUsers.ToList();
       }

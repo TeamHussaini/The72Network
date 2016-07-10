@@ -613,8 +613,8 @@
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\UserExtendedProfile.cshtml" />
-    <Content Include="Views\Generic\Connections.cshtml" />
-    <Content Include="Views\Generic\RequestsPage.cshtml" />
+    <Content Include="Views\Request\Connections.cshtml" />
+    <Content Include="Views\Request\RequestsPage.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -641,8 +641,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\ProfilePic\" />
+    <Folder Include="Views\Generic\" />
     <Folder Include="Views\Message\" />
-    <Folder Include="Views\Request\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\The72Network.Web.Services\The72Network.Web.Services.csproj">

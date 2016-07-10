@@ -65,7 +65,10 @@ namespace The72Network.Web.Services.Account
       {
         user = userProfileRepository.Get(entity => entity.UserName == username).FirstOrDefault();
         user.UserExtendedProfile = user.UserExtendedProfile;
-        user.UserExtendedProfile.Tags = user.UserExtendedProfile.Tags;
+        if (user.UserExtendedProfile != null)
+        {
+          user.UserExtendedProfile.Tags = user.UserExtendedProfile.Tags;
+        }
       }
 
       return user;

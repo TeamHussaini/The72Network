@@ -55,7 +55,7 @@
   <script>
     function processAcceptedRequest(reqId, elementId) {
       $.ajax({
-        url: '@(Url.Action("ProcessRequest", "Generic"))',
+        url: '@(Url.Action("ProcessRequest", "Request"))',
         type: 'post',
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
@@ -74,7 +74,7 @@
 
     function processDeferredRequest(reqId, elementId) {
       $.ajax({
-        url: '@(Url.Action("ProcessRequest", "Generic"))',
+        url: '@(Url.Action("ProcessRequest", "Request"))',
         type: 'post',
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
@@ -93,7 +93,7 @@
 
     function processDeclinedRequest(reqId, elementId) {
       $.ajax({
-        url: '@(Url.Action("ProcessRequest", "Generic"))',
+        url: '@(Url.Action("ProcessRequest", "Request"))',
         type: 'post',
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',

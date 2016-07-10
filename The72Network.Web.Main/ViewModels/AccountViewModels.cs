@@ -267,7 +267,7 @@ namespace The72Network.Web.Main.ViewModels
       set;
     }
 
-    public List<string> Tags
+    public IList<string> Tags
     {
       get;
       set;

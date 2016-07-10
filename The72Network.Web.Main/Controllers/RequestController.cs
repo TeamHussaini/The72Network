@@ -52,7 +52,7 @@ namespace The72Network.Web.Main.Controllers
           UserName = x.Username,
           TimeStamp = x.TimeStamp
         });
-      return View("~/Views/Generic/RequestsPage.cshtml", pendingUserRequests.ToList());
+      return View("~/Views/Request/RequestsPage.cshtml", pendingUserRequests.ToList());
     }
 
     [Authorize]
@@ -72,7 +72,25 @@ namespace The72Network.Web.Main.Controllers
     [Authorize]
     public ViewResult Connections()
     {
-      return View(_requestService.GetConnectedUsers(User.Identity.Name));
+      var connectedUsers = _requestService.GetConnectedUsers(User.Identity.Name);
+
+      var connectedUsersModel = connectedUsers.Select(x => new CompleteUserProfileViewModel
+        {
+          AlmaMater = x.AlmaMater,
+          City = x.City,
+          Country = x.Country,
+          Description = x.Description,
+          DOB = x.DOB,
+          EmailId = x.EmailId,
+          ImageUrl = x.ImageUrl,
+          MobilePhone = x.MobilePhone,
+          Profession = x.Profession,
+          Qualifications = x.Qualifications,
+          Tags = x.Tags,
+          UserName = x.UserName
+        });
+
+      return View(connectedUsersModel.ToList());
     }
 
     #region Privates

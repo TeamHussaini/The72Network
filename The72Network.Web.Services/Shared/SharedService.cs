@@ -27,7 +27,7 @@ namespace The72Network.Web.Services.Shared
             if (socialRecord.Count < Constants.ThresholdSocialTypeCount)
             {
               success = socialType == SocialTypes.Request ?
-                TrySaveRequest(profileId, user, unitOfWork, out socialId) :
+                TrySaveRequest(profileId, user.Id, unitOfWork, out socialId) :
                 TrySaveMessage(profileId, user, out socialId);
 
               if (!success)
@@ -46,7 +46,7 @@ namespace The72Network.Web.Services.Shared
           else
           {
             success = socialType == SocialTypes.Request ?
-              TrySaveRequest(profileId, user, unitOfWork, out socialId) :
+              TrySaveRequest(profileId, user.Id, unitOfWork, out socialId) :
               TrySaveMessage(profileId, user, out socialId);
 
             if (!success)
@@ -91,12 +91,13 @@ namespace The72Network.Web.Services.Shared
 
     #region Privates
 
-    private bool TrySaveRequest(int profileId, UserProfile fromUser, UnitOfWork unitOfWork, out int? socialId)
+    private bool TrySaveRequest(int profileId, int fromUserId, UnitOfWork unitOfWork, out int? socialId)
     {
       socialId = -1;
       try
       {
-        UserProfile toUser = unitOfWork.UserProfileRepository.Get(e => e.Id == profileId).FirstOrDefault();
+        var toUser = unitOfWork.UserProfileRepository.Get(e => e.Id == profileId).FirstOrDefault();
+        var fromUser = unitOfWork.UserProfileRepository.Get(e => e.Id == fromUserId).FirstOrDefault();
         bool dublicateRequest = unitOfWork.RequestRepository.Get(r => r.To.Id == toUser.Id && r.From.Id == fromUser.Id).Any();
         if (dublicateRequest)
         {
@@ -111,7 +112,6 @@ namespace The72Network.Web.Services.Shared
         };
 
         unitOfWork.RequestRepository.Insert(request);
-        unitOfWork.Save();
         socialId = request.Id;
       }
       catch (Exception ex)

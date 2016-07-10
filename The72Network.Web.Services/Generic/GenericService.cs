@@ -21,7 +21,7 @@ namespace The72Network.Web.Services.Generic
       {
         var tagMap = unitOfWork.TagRepository.Get(_ => true).ToDictionary(x => x.Id, x => x);
         var userProfile = unitOfWork.UserProfileRepository.Get(entity => entity.UserName == username).FirstOrDefault();
-        var requestedUsers = unitOfWork.RequestRepository.Get(entity => entity.From.Id == userProfile.Id).Select(x => x.To.Id).ToList();
+        var requestedUsers = unitOfWork.RequestRepository.Get(entity => entity.From.Id == userProfile.Id).Where(x => x.To != null).Select(x => x.To.Id).ToList();
         foreach (var id in tagIds)
         {
           Tag tag;

@@ -353,7 +353,7 @@
     function processRequestSending(id, elementId) {
       if (id != "") {
         $.ajax({
-          url: '@(Url.Action("SendRequest", "Generic"))/' + id,
+          url: '@(Url.Action("SendRequest", "Request"))/' + id,
           type: 'post',
           dataType: 'json',
           contentType: 'application/json; charset=utf-8',

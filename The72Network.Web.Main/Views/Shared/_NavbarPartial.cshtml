@@ -48,7 +48,7 @@
         </ul><!--//nav-->
         <ul class="nav navbar-nav" style="float: right">
           <li class="nav-item">
-            <a id="nav-request" href="@(Url.Action("GetRequests", "Generic"))">Requests<span class="badge badge-info">@Model.NumberOfRequests</span></a>
+            <a id="nav-request" href="@(Url.Action("GetRequests", "Request"))">Requests<span class="badge badge-info">@Model.NumberOfRequests</span></a>
           </li>
           <li class="nav-item">
             <a id="nav-message" href="@(Url.Action("GetMessages", "Generic"))">Inbox <span class="badge badge-success">@Model.NumberOfMessages</span></a>
@@ -66,10 +66,10 @@
      })
               </li>
               <li>
-                @Html.ActionLink("Connections", "Connections", "Generic", null, new
-     {
-       @class = "btn btn-primary"
-     })
+                @Html.ActionLink("Connections", "Connections", "Request", null, new
+           {
+             @class = "btn btn-primary"
+           })
               </li>
               <li>
                 @Html.ActionLink("SignOut", "SignOut", "Account", null, new
