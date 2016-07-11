@@ -76,13 +76,9 @@
     <Compile Include="EntityFramework\CommonDbContext.cs" />
     <Compile Include="Extensions\DBExtensionMethods.cs" />
     <Compile Include="Helpers\DbHelper.cs" />
-    <Compile Include="Migrations\201607021735072_Assembly Separation.cs" />
-    <Compile Include="Migrations\201607021735072_Assembly Separation.Designer.cs">
-      <DependentUpon>201607021735072_Assembly Separation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607101712404_Initial.cs" />
-    <Compile Include="Migrations\201607101712404_Initial.Designer.cs">
-      <DependentUpon>201607101712404_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201607102237298_InitialCreate.cs" />
+    <Compile Include="Migrations\201607102237298_InitialCreate.Designer.cs">
+      <DependentUpon>201607102237298_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,13 +99,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607021735072_Assembly Separation.resx">
-      <DependentUpon>201607021735072_Assembly Separation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607101712404_Initial.resx">
-      <DependentUpon>201607101712404_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607102237298_InitialCreate.resx">
+      <DependentUpon>201607102237298_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

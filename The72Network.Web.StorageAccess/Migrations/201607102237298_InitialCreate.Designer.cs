@@ -7,13 +7,13 @@ namespace The72Network.Web.StorageAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AssemblySeparation : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AssemblySeparation));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201607021735072_Assembly Separation"; }
+            get { return "201607102237298_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

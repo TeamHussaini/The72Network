@@ -12,7 +12,7 @@ namespace The72Network.Web.StorageAccess.Migrations
     public Configuration()
     {
       AutomaticMigrationsEnabled = false;
-      ContextKey = "The72Network.Web.StorageAccess.EntityFramework.UserProfileDatabaseContext";
+      ContextKey = "The72Network.Web.StorageAccess.EntityFramework.CommonDbContext";
     }
 
     protected override void Seed(CommonDbContext context)
