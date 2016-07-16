@@ -11,5 +11,7 @@ namespace The72Network.Web.Shared
     public const int ThresholdDays = 7;
 
     public const int ThresholdSocialTypeCount = 20;
+
+    public const string SendGridEnvironmentKey = "sendgrid_apikey";
   }
 }

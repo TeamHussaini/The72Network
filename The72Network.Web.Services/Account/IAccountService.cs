@@ -28,5 +28,7 @@ namespace The72Network.Web.Services.Account
     void AddUserExtendedProfile(string username, string almamater, string city, string dob, string profession, string qualifications, string description, IList<int> selectedTags);
 
     bool TryUploadImage(string username, HttpPostedFileBase file);
+
+    void SendMail(string username, string emailId);
   }
 }

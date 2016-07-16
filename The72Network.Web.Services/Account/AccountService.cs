@@ -9,11 +9,22 @@ using The72Network.Web.StorageAccess.EntityFramework;
 using The72Network.Web.StorageAccess.Helpers;
 using The72Network.Web.StorageAccess.Repositories;
 using The72Newtork.Web.Shared.Utilities;
+using The72Network.Web.Services.MailUtility;
 
 namespace The72Network.Web.Services.Account
 {
   public class AccountService : IAccountService
   {
+    public AccountService()
+    {
+      _mailService = new MailService();
+    }
+
+    public AccountService(IMailService mailService)
+    {
+      _mailService = mailService;
+    }
+
     public IList<string> GetCountries()
     {
       return Util.ListOfCountries();
@@ -113,10 +124,6 @@ namespace The72Network.Web.Services.Account
 
         if (user.UserExtendedProfile != null)
         {
-          //foreach (Tag tag in user.UserExtendedProfile.Tags)
-          //{
-          //  // This updates the tag
-          //}
           user.UserExtendedProfile.Tags = user.UserExtendedProfile.Tags.ToList();
           userExtendedProfile.ImageUrl = user.UserExtendedProfile.ImageUrl;
           unitOfWork.UserExtendedProfileRepository.Update(userExtendedProfile);
@@ -176,13 +183,24 @@ namespace The72Network.Web.Services.Account
           }
         }
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
         throw ex;
       }
 
       return true;
     }
+
+    public void SendMail(string username, string emailId)
+    {
+      _mailService.SendMailToNewUser(emailId);
+    }
+
+    #region Privates
+
+    private IMailService _mailService;
+
+    #endregion
 
   }
 }
