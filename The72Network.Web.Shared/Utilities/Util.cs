@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+using System.Diagnostics;
+using The72Network.Web.Shared;
 
 namespace The72Newtork.Web.Shared.Utilities
 {
@@ -77,7 +77,8 @@ namespace The72Newtork.Web.Shared.Utilities
       }
     }
 
-    public static List<string> ListOfCountries()    {
+    public static List<string> ListOfCountries()
+    {
       return new List<string>
       {
         "Afghanistan",
@@ -320,6 +321,32 @@ namespace The72Newtork.Web.Shared.Utilities
         "Zambia",
         "Zimbabwe"
       };
+    }
+
+    public static IList<string> ListOfAdmins(string adminsStringFromWebSettings)
+    {
+      string adminsString = string.Empty;
+      try
+      {
+        adminsString = Environment.GetEnvironmentVariable(Constants.Admin_Usernames);
+      }
+      catch (Exception ex)
+      {
+        Debug.Write("Failed to retrieve environment settings with ex : {0}", ex.ToString());
+      }
+
+      IList<string> adminList;
+      if (!string.IsNullOrWhiteSpace(adminsString))
+      {
+        adminList = adminsString.Split(Constants.Admin_Usernames_Delimiter);
+      }
+      else
+      {
+        // Only if EnvironmentSettings was not found we use app settings to get admins.
+        adminList = adminsStringFromWebSettings.Split(Constants.Admin_Usernames_Delimiter);
+      }
+
+      return adminList;
     }
   }
 }

@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Security;
 using The72Network.Web.StorageAccess.EntityFramework;
 using WebMatrix.WebData;
 
@@ -39,10 +40,14 @@ namespace The72Network.Web.Main
       public SimpleMembershipInitializer()
       {
         using (var context = new CommonDbContext())
+        {
           context.UserProfiles.Find(1);
+        }
 
         if (!WebSecurity.Initialized)
+        {
           WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "Id", "UserName", autoCreateTables: true);
+        }
       }
     }
   }

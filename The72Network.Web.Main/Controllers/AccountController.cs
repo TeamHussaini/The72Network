@@ -13,6 +13,8 @@ using The72Network.Web.StorageAccess.EntityFramework;
 using WebMatrix.WebData;
 using The72Network.Web.Main.ViewModels;
 using The72Network.Web.Services.Account;
+using System.Configuration;
+using The72Network.Web.Shared;
 
 namespace The72Network.Web.Main.Controllers
 {
@@ -88,7 +90,7 @@ namespace The72Network.Web.Main.Controllers
     }
 
     //
-    // inbox
+    // Inbox
 
     [AllowAnonymous]
     public ActionResult Inbox(InboxModel model)
@@ -110,9 +112,26 @@ namespace The72Network.Web.Main.Controllers
         {
           _accountService.AddUser(model.UserName, model.Country, model.EmailId, model.MobilePhone);
 
-          WebSecurity.CreateAccount(model.UserName, model.Password);
+          string confirmationToken = WebSecurity.CreateAccount(model.UserName, model.Password, true);
           WebSecurity.Login(model.UserName, model.Password);
 
+          var roles = (SimpleRoleProvider)Roles.Provider;
+
+          // If username is the one for admin, add the admin role for this user.
+          if (_accountService.GetAdmins(ConfigurationManager.AppSettings[Constants.Admin_Usernames]).Contains(model.UserName.ToLower()))
+          {
+            if (!roles.GetRolesForUser(model.UserName).Contains(Constants.AdminRoleName))
+            {
+              roles.AddUsersToRoles(new[] { model.UserName }, new[] { Constants.AdminRoleName });
+            }
+          }
+          else
+          {
+            if (!roles.GetRolesForUser(model.UserName).Contains(Constants.UserRoleName))
+            {
+              roles.AddUsersToRoles(new[] { model.UserName }, new[] { Constants.UserRoleName });
+            }
+          }
 
           // Once the user has been created, send out a mail to the user.
           _accountService.SendMail(model.UserName, model.EmailId);

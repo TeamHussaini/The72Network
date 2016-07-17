@@ -3,10 +3,10 @@ using System.Data.Entity.Migrations;
 using System.Collections.Generic;
 using The72Network.Web.StorageAccess.EntityFramework;
 using The72Network.Web.StorageAccess.DBModels;
+using System.Web.Security;
 
 namespace The72Network.Web.StorageAccess.Migrations
 {
-
   internal sealed class Configuration : DbMigrationsConfiguration<CommonDbContext>
   {
     public Configuration()
@@ -34,6 +34,16 @@ namespace The72Network.Web.StorageAccess.Migrations
     private static void SeedMemberShip()
     {
       WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "Id", "UserName", autoCreateTables: true);
+      var roles = (SimpleRoleProvider)Roles.Provider;
+
+      if (!roles.RoleExists("Admin"))
+      {
+        roles.CreateRole("Admin");
+      }
+      if (!roles.RoleExists("User"))
+      {
+        roles.CreateRole("User");
+      }
     }
   }
 }

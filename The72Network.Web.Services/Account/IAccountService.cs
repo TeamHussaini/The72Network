@@ -13,6 +13,8 @@ namespace The72Network.Web.Services.Account
   {
     IList<string> GetCountries();
 
+    IList<string> GetAdmins(string adminsFromAppSetting);
+
     void AddUser(string username, string country, string emailId, string mobilePhone);
 
     bool IsUserUnique(string username);

@@ -30,6 +30,11 @@ namespace The72Network.Web.Services.Account
       return Util.ListOfCountries();
     }
 
+    public IList<string> GetAdmins(string adminsFromAppSetting)
+    {
+      return Util.ListOfAdmins(adminsFromAppSetting);
+    }
+
     public void AddUser(string username, string country, string emailId, string mobilePhone)
     {
       UserProfile user = new UserProfile()
