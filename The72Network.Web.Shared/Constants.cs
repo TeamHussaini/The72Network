@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace The72Network.Web.Shared
+﻿namespace The72Network.Web.Shared
 {
   public static class Constants
   {
@@ -13,5 +7,7 @@ namespace The72Network.Web.Shared
     public const int ThresholdSocialTypeCount = 20;
 
     public const string SendGridEnvironmentKey = "sendgrid_apikey";
+
+    public const string Test = "1";
   }
 }
