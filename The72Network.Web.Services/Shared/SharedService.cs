@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using The72Network.Web.Shared;
 using The72Network.Web.Shared.Enums;
@@ -81,7 +82,7 @@ namespace The72Network.Web.Services.Shared
       }
       catch (Exception ex)
       {
-        System.Diagnostics.Debug.Write("Operation failed with following ex : {0}", ex.ToString());
+        Trace.TraceError("Operation failed with following ex : {0}", ex.ToString());
 
         return false;
       }
@@ -116,7 +117,7 @@ namespace The72Network.Web.Services.Shared
       }
       catch (Exception ex)
       {
-        System.Diagnostics.Debug.Write("Faild with following ex : {0}", ex.ToString());
+        Trace.TraceError("Faild with following ex : {0}", ex.ToString());
 
         return false;
       }

@@ -332,7 +332,7 @@ namespace The72Newtork.Web.Shared.Utilities
       }
       catch (Exception ex)
       {
-        Debug.Write("Failed to retrieve environment settings with ex : {0}", ex.ToString());
+        Trace.TraceError("Failed to retrieve environment settings with ex : {0}", ex);
       }
 
       IList<string> adminList;

@@ -18,16 +18,18 @@ namespace The72Network.Web.Services.MailUtility
       catch (Exception)
       {
         // If failed to retrieve environment variable, this probably means that we are not in azure environment.
-        Debug.Write("Failed to retrieve Environment Variable");
+        Trace.TraceError("Failed to retrieve Environment Variable");
         _client = new FakeSendGridClient();
       }
 
       if (string.IsNullOrWhiteSpace(apiKey))
       {
+        Trace.TraceWarning("Failed to retrieve the ApiKey from ED setting");
         _client = new FakeSendGridClient();
       }
       else
       {
+        Trace.TraceInformation("Setting the API key with this value : {0}", apiKey.Substring(0, 5));
         _client = new SendGridAPIClient(apiKey);
       }
     }
@@ -45,13 +47,13 @@ namespace The72Network.Web.Services.MailUtility
       }
       catch (NullReferenceException nrex)
       {
-        Debug.Write(string.Format("Possible reason is that the call is made from FakeSendGrid client. ex : {0}", nrex));
+        Trace.TraceError("Possible reason is that the call is made from FakeSendGrid client. ex : {0}", nrex);
 
         response = string.Empty;
       }
       catch (Exception ex)
       {
-        Debug.Write(string.Format("Sending mail failed with following exception ex : {0}"), ex.ToString());
+        Trace.TraceError("Sending mail failed with following exception ex : {0}", ex.ToString());
       }
 
       return response;

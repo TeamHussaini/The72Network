@@ -6,7 +6,7 @@
 
     public const int ThresholdSocialTypeCount = 20;
 
-    public const string SendGridEnvironmentKey = "sendgrid_apikey";
+    public const string SendGridEnvironmentKey = "APPSETTING_sendgrid_apikey";
 
     // Admin usernames are saved as Environment Setting
     public const string Admin_Usernames = "admin_usernames";

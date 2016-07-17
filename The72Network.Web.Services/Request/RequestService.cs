@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace The72Network.Web.Services.Request
       }
       catch (Exception ex)
       {
-        System.Diagnostics.Debug.Write("Failed with following ex : {0}", ex.ToString());
+        Trace.TraceError("Failed with following ex : {0}", ex.ToString());
         success = false;
       }
 

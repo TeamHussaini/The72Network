@@ -112,7 +112,11 @@ namespace The72Network.Web.Main.Controllers
         {
           _accountService.AddUser(model.UserName, model.Country, model.EmailId, model.MobilePhone);
 
-          string confirmationToken = WebSecurity.CreateAccount(model.UserName, model.Password, true);
+          // Once the user has been created, send out a mail to the user.
+          _accountService.SendMail(model.UserName, model.EmailId);
+
+          //string confirmationToken = WebSecurity.CreateAccount(model.UserName, model.Password, true);
+          WebSecurity.CreateAccount(model.UserName, model.Password);
           WebSecurity.Login(model.UserName, model.Password);
 
           var roles = (SimpleRoleProvider)Roles.Provider;
@@ -133,15 +137,13 @@ namespace The72Network.Web.Main.Controllers
             }
           }
 
-          // Once the user has been created, send out a mail to the user.
-          _accountService.SendMail(model.UserName, model.EmailId);
-
-          //return RedirectToAction("UserExtendedProfile", "Account");
           return RedirectToAction("Index", "Home");
         }
         catch (MembershipCreateUserException e)
         {
           ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+
+          return RedirectToAction("Index", "Home");
         }
       }
 
