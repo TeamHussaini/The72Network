@@ -7,7 +7,5 @@
     public const int ThresholdSocialTypeCount = 20;
 
     public const string SendGridEnvironmentKey = "sendgrid_apikey";
-
-    public const string Test = "1";
   }
 }
