@@ -2,6 +2,7 @@
 using SendGrid.Helpers.Mail;
 using System;
 using System.Diagnostics;
+using System.Threading;
 using The72Network.Web.Shared;
 
 namespace The72Network.Web.Services.MailUtility
@@ -10,28 +11,6 @@ namespace The72Network.Web.Services.MailUtility
   {
     public MailService()
     {
-      string apiKey = string.Empty;
-      try
-      {
-        apiKey = Environment.GetEnvironmentVariable(Constants.SendGridEnvironmentKey);
-      }
-      catch (Exception)
-      {
-        // If failed to retrieve environment variable, this probably means that we are not in azure environment.
-        Trace.TraceError("Failed to retrieve Environment Variable");
-        _client = new FakeSendGridClient();
-      }
-
-      if (string.IsNullOrWhiteSpace(apiKey))
-      {
-        Trace.TraceWarning("Failed to retrieve the ApiKey from ED setting");
-        _client = new FakeSendGridClient();
-      }
-      else
-      {
-        Trace.TraceInformation("Setting the API key with this value : {0}", apiKey.Substring(0, 5));
-        _client = new SendGridAPIClient(apiKey);
-      }
     }
 
     public dynamic SendMailToNewUser(string emailId)
@@ -43,7 +22,7 @@ namespace The72Network.Web.Services.MailUtility
       dynamic response = null;
       try
       {
-        response = _client.client.mail.send.post();
+        response = _client.Value.client.mail.send.post(requestBody: mail.Get());
       }
       catch (NullReferenceException nrex)
       {
@@ -61,7 +40,31 @@ namespace The72Network.Web.Services.MailUtility
 
     #region Privates
 
-    SendGridAPIClient _client;
+    private static Lazy<SendGridAPIClient> _client = new Lazy<SendGridAPIClient>(() =>
+    {
+      string apiKey = string.Empty;
+      try
+      {
+        apiKey = Environment.GetEnvironmentVariable(Constants.SendGridEnvironmentKey);
+      }
+      catch (Exception)
+      {
+        // If failed to retrieve environment variable, this probably means that we are not in azure environment.
+        Trace.TraceError("Failed to retrieve Environment Variable");
+        return new FakeSendGridClient();
+      }
+
+      if (string.IsNullOrWhiteSpace(apiKey))
+      {
+        Trace.TraceWarning("Failed to retrieve the ApiKey from ED setting");
+        return new FakeSendGridClient();
+      }
+      else
+      {
+        Trace.TraceInformation("Setting the API key with this value : {0}", apiKey.Substring(0, 5));
+        return new SendGridAPIClient(apiKey);
+      }
+    }, LazyThreadSafetyMode.ExecutionAndPublication);
 
     #endregion
   }

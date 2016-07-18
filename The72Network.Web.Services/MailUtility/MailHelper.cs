@@ -24,7 +24,7 @@ namespace The72Network.Web.Services.MailUtility
     {
       get
       {
-        return new Content("text/plain", "We'll have insert some html here.");
+        return new Content("text/plain", "We'll have to insert some html here.");
       }
     }
   }
